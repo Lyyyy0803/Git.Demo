@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sign in/sign up</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="from-box">
+        <!--注册-->
+        <div class="register-box hidden">
+          <h1>register</h1>
+          <input type="text" placeholder="UserName" />
+          <input type="email" placeholder="Email Address" />
+          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Confirm Password" />
+          <button>Create an account</button>
+        </div>
+        <!--登录-->
+        <div class="login-box">
+          <h1>login</h1>
+          <input type="email" placeholder="Email Address" />
+          <input type="password" placeholder="Password" />
+          <a href="#" class="forget" id="forget-password"
+            >Forget your password? <span>retrieve password</span></a
+          >
+          <button>Login</button>
+        </div>
+        <!--忘记密码-->
+        <div class="forget-box hidden">
+          <h1>retrieve password</h1>
+          <input type="password" placeholder="New Password" />
+          <input type="password" placeholder="Confirm Password" />
+          <input type="email" placeholder="Email Address" />
+          <div class="verification-container">
+            <button class="send-verification-code">
+              Send verification code
+            </button>
+            <input
+              type="text"
+              class="check-email"
+              id="check-email"
+              placeholder=""
+            />
+          </div>
+          <button class="confirm-password">Confirm</button>
+        </div>
+      </div>
+
+      <div class="con-box left">
+        <h2>Welcome back!</h2>
+        <p>
+          To keep connected with us please login with your personal information.
+        </p>
+        <img src="img/welcome.png" alt="" />
+        <button id="login">sign in</button>
+      </div>
+      <div class="con-box right">
+        <h2>Hello friend!</h2>
+        <p>Enter your personal details and start journey with us.</p>
+        <img src="img/hello.png" alt="" />
+        <button id="register">sign up</button>
+      </div>
+
+      <script>
+        //操作的元素
+        let login = document.getElementById("login");
+        let register = document.getElementById("register");
+        let form_box = document.getElementsByClassName("from-box")[0];
+        let register_box = document.getElementsByClassName("register-box")[0];
+        let login_box = document.getElementsByClassName("login-box")[0];
+        let forget_box = document.getElementsByClassName("forget-box")[0];
+        let forget_password = document.getElementById("forget-password");
+
+        //点击注册
+        register.addEventListener("click", () => {
+          form_box.style.transform = "translateX(100%)";
+          login_box.classList.add("hidden");
+          register_box.classList.remove("hidden");
+        });
+
+        //点击登录
+        login.addEventListener("click", () => {
+          form_box.style.transform = "translateX(0%)";
+          register_box.classList.add("hidden");
+          login_box.classList.remove("hidden");
+        });
+
+        //点击忘记密码
+        forget_password.addEventListener("click", (e) => {
+          e.preventDefault(); // 阻止默认的链接行为
+          form_box.style.transform = "translateX(0%)"; // 调整位置以显示忘记密码框
+          login_box.classList.add("hidden");
+          register_box.classList.add("hidden");
+          forget_box.classList.remove("hidden");
+
+          //点击确认按钮
+          let confirm_password = document.querySelector(".confirm-password");
+          confirm_password.addEventListener("click", () => {
+            //隐藏重置密码
+            forget_box.classList.add("hidden");
+            alert("Password reset successfully!");
+            //显示登录页面
+            login_box.classList.remove("hidden");
+            form_box.style.transform = "translateX(0%)";
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>
