@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 左侧导航栏 -->
+      <div class="sidebar">
+        <div class="logo">
+          <img
+            src="https://via.placeholder.com/50"
+            alt="Logo"
+            class="logo-img"
+          />
+          <span>LOGO NAME</span>
+        </div>
+        <ul class="nav-links">
+          <li data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </li>
+          <li data-page="user-profile" class="active">
+            <i class="fas fa-user"></i>
+            <span>User Profile</span>
+          </li>
+          <li data-page="my-book">
+            <i class="fas fa-book"></i>
+            <span>My Book</span>
+          </li>
+          <li data-page="goal-setting">
+            <i class="fas fa-bullseye"></i>
+            <span>Goal Setting</span>
+          </li>
+          <li data-page="reading-history">
+            <i class="fas fa-history"></i>
+            <span>Reading History</span>
+          </li>
+          <li data-page="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </li>
+          <li data-page="log-out" id="logoutItem">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log out</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右侧内容区 -->
+      <div class="content">
+        <div class="header">
+          <h2 id="pageTitle">Edit Profile</h2>
+          <div class="header-icons">
+            <div class="notification">
+              <i class="fas fa-bell"></i>
+              <span>Hi, User</span>
+            </div>
+            <div class="user-avatar">
+              <img
+                src="https://via.placeholder.com/40"
+                alt="User Avatar"
+                id="headerAvatar"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 用户资料页面 -->
+        <div class="profile-page" id="profilePage">
+          <div class="profile-content">
+            <div class="avatar-upload">
+              <div class="avatar-placeholder" id="avatarPlaceholder">
+                <div class="placeholder-content">
+                  <i class="fas fa-camera"></i>
+                </div>
+              </div>
+              <img
+                src=""
+                alt="Profile Avatar"
+                id="profileAvatar"
+                class="rounded-avatar"
+                style="display: none"
+              />
+              <input
+                type="file"
+                id="avatarUpload"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+
+            <div class="profile-info">
+              <h3>User Profile</h3>
+              <div class="info-item">
+                <p>Email: user@example.com</p>
+              </div>
+              <div class="info-item">
+                <p id="usernameDisplay">User Name: username</p>
+                <button class="edit-btn" onclick="showChangeUsernamePage()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+              <div class="info-item">
+                <p>Password</p>
+                <button class="edit-btn" onclick="showChangePasswordPage()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 阅读历史页面 -->
+        <div
+          class="reading-history-page"
+          id="readingHistoryPage"
+          style="display: none"
+        >
+        <div class="search-bar">
+          <div class="search-container">
+            <input type="text" placeholder="Search your books" id="searchInput" />
+            <button id="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <select id="filter-select">
+            <option value="all">All</option>
+            <option value="week">Last 7 Days</option>
+            <option value="month">Last 30 Days</option>
+            <option value="year">Last Year</option>
+          </select>
+          <input type="date" id="start-date" placeholder="Start date" />
+          <span class="date-separator">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <input type="date" id="end-date" placeholder="End date" />
+        </div>
+        <div class="history" id="history"></div>
+
+        <!-- 修改用户名页面 -->
+        <div
+          class="change-username-page"
+          id="changeUsernamePage"
+          style="display: none"
+        >
+          <h3>Change User Name</h3>
+          <div class="form-group">
+            <label for="newUsername">New User Name</label>
+            <input
+              type="text"
+              id="newUsername"
+              name="newUsername"
+              placeholder="Enter new username"
+            />
+          </div>
+          <div class="form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="showProfilePage()"
+            >
+              Return
+            </button>
+            <button type="button" class="save-btn" onclick="updateUsername()">
+              Update
+            </button>
+          </div>
+        </div>
+
+        <!-- 修改密码页面 -->
+        <div
+          class="change-password-page"
+          id="changePasswordPage"
+          style="display: none"
+        >
+          <h3>Change Password</h3>
+          <div class="form-group">
+            <label for="verificationCode">Verification Code</label>
+            <input
+              type="text"
+              id="verificationCode"
+              name="verificationCode"
+              placeholder="Enter verification code"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm new password"
+            />
+          </div>
+          <div class="form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="showProfilePage()"
+            >
+              Return
+            </button>
+            <button type="button" class="save-btn" onclick="updatePassword()">
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
