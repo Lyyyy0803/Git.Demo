@@ -1,0 +1,385 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* 左侧导航栏样式 */
+.sidebar {
+  width: 300px;
+  background-color: #d8c4e3;
+  padding: 20px 0;
+  border-right: 1px solid #ddd;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  border-bottom: 1px solid #c9b5d9;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 20px 0;
+}
+
+.nav-links li {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #c9b5d9;
+}
+
+.nav-links li.active {
+  background-color: #c9b5d9;
+  color: #a262ad;
+}
+
+.nav-links li i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* 右侧内容区样式 */
+.content {
+  flex: 1;
+  padding: 20px 30px;
+  background-color: #f0e6f8;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #d8c4e3;
+  padding-bottom: 15px;
+}
+
+.header h2 {
+  font-size: 28px;
+  color: #a262ad;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+}
+
+.notification i {
+  font-size: 20px;
+  color: #a262ad;
+  margin-right: 10px;
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+/* 用户资料内容样式 */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-upload {
+  position: relative;
+  margin-bottom: 30px;
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 2px solid #a262ad; /* 添加黑色边框 */
+  cursor: pointer;
+}
+
+.avatar-placeholder .placeholder-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-placeholder .placeholder-content i {
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.rounded-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a262ad; /* 添加黑色边框 */
+  display: none;
+}
+
+.profile-info {
+  width: 100%;
+  max-width: 600px;
+}
+
+.profile-info h3 {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 24px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #d8c4e3;
+}
+
+.info-item p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  color: #a262ad;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* 修改用户名和密码页面样式 */
+.change-username-page,
+.change-password-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.change-username-page h3,
+.change-password-page h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 18px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #a262ad;
+  border: 1px solid #a262ad;
+}
+
+.save-btn {
+  background-color: #a262ad;
+  color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+
+  .nav-links li {
+    width: 50%;
+    text-align: center;
+  }
+}
+/* 阅读历史页面样式 */
+/* 搜索框和筛选日期功能样式 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input[type="text"],
+.search-bar select,
+.search-container button,
+.search-bar input[type="date"] {
+  height: 40px; /* 设置统一的高度 */
+  border-radius: 5px;
+  border: 1px solid #a262ad;
+  padding: 0 10px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #a262ad; /* 紫色 */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.search-container input {
+  width: 300px; /* 宽度 */
+  height: 40px; /* 高度 */
+  padding: 0 10px; /* 内边距 */
+  font-size: 16px; /* 字体大小 */
+  border: 1px solid #a262ad; /* 边框样式 */
+  color: #a262ad;
+  border-radius: 0px;
+}
+
+.search-container input[type="text"],
+.search-bar select,
+.search-bar input:focus {
+  border-color: #a262ad; /* 聚焦时的边框颜色 */
+  background-color: #fff; /* 聚焦时的背景颜色 */
+  outline: none; /* 移除聚焦时的默认外边框 */
+}
+
+.search-container button {
+  padding: 8px 12px;
+  background-color: #a262ad; /* 紫色 */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.search-bar select {
+  padding: 10px;
+  border: 1px solid #a262ad; /* 紫色 */
+  color: #a262ad;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-bar input[type="date"] {
+  padding: 10px;
+  border: 1px solid #a262ad; /* 紫色 */
+  color: #a262ad;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.date-separator {
+  color: #a262ad; /* 紫色 */
+  margin: 0 10px; /* 调整箭头与日期输入框之间的间距 */
+  font-size: 1.2em; /* 调整图标大小 */
+}
+
+/* 历史记录书籍样式 */
+.history-item h2 {
+  color: #a262ad; /* 紫色 */
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.book img {
+  width: 150px;
+  height: auto;
+}
+
+.book span {
+  color: #a262ad; /* 紫色 */
+}
+
+.no-history-message {
+  text-align: center;
+  font-size: 18px;
+  color: #a262ad; /* 紫色 */
+  margin-top: 20px;
+}
