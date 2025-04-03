@@ -61,7 +61,7 @@
           <div class="header-icons">
             <div class="notification">
               <i class="fas fa-bell"></i>
-              <span>Hi, User</span>
+              <span id="greetingUser">Hi, User</span>
             </div>
             <div class="user-avatar">
               <img
@@ -124,26 +124,31 @@
           id="readingHistoryPage"
           style="display: none"
         >
-        <div class="search-bar">
-          <div class="search-container">
-            <input type="text" placeholder="Search your books" id="searchInput" />
-            <button id="search-button">
-              <i class="fas fa-search"></i>
-            </button>
+          <div class="search-bar">
+            <div class="search-container">
+              <input
+                type="text"
+                placeholder="Search your books"
+                id="searchInput"
+              />
+              <button id="search-button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <select id="filter-select">
+              <option value="all">All</option>
+              <option value="week">Last 7 Days</option>
+              <option value="month">Last 30 Days</option>
+              <option value="year">Last Year</option>
+            </select>
+            <input type="date" id="start-date" placeholder="Start date" />
+            <span class="date-separator">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <input type="date" id="end-date" placeholder="End date" />
           </div>
-          <select id="filter-select">
-            <option value="all">All</option>
-            <option value="week">Last 7 Days</option>
-            <option value="month">Last 30 Days</option>
-            <option value="year">Last Year</option>
-          </select>
-          <input type="date" id="start-date" placeholder="Start date" />
-          <span class="date-separator">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-          <input type="date" id="end-date" placeholder="End date" />
+          <div class="history" id="history"></div>
         </div>
-        <div class="history" id="history"></div>
 
         <!-- 修改用户名页面 -->
         <div
@@ -182,6 +187,15 @@
           style="display: none"
         >
           <h3>Change Password</h3>
+          <div class="form-group">
+            <button
+              type="button"
+              class="save-btn"
+              onclick="sendVerificationCode()"
+            >
+              Send Verification Code
+            </button>
+          </div>
           <div class="form-group">
             <label for="verificationCode">Verification Code</label>
             <input
