@@ -10,8 +10,7 @@ document
         document.getElementById("profileAvatar").style.display = "block";
         document.getElementById("avatarPlaceholder").style.display = "none";
 
-        // 更新左侧和顶部的头像
-        document.querySelector(".logo-img").src = e.target.result;
+        // 更新顶部的头像
         document.querySelector(".user-avatar img").src = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -31,6 +30,7 @@ function showChangeUsernamePage() {
   document.getElementById("changeUsernamePage").style.display = "block";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("pageTitle").textContent = "Edit Profile";
 }
 
 // 显示修改密码页面
@@ -39,6 +39,7 @@ function showChangePasswordPage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "block";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("pageTitle").textContent = "Edit Profile";
 }
 
 // 显示阅读历史页面
@@ -47,6 +48,7 @@ function showReadingHistoryPage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "block";
+  document.getElementById("pageTitle").textContent = "Reading History";
 }
 
 // 返回用户资料页面
@@ -55,17 +57,8 @@ function showProfilePage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("pageTitle").textContent = "Edit Profile";
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 为“Log out”项添加点击事件监听器
-  document
-    .getElementById("logoutItem")
-    .addEventListener("click", function (event) {
-      event.preventDefault(); // 阻止默认的链接行为
-      window.location.href = "signin.html"; // 跳转到登录注册页面
-    });
-});
 
 // 更新用户名
 function updateUsername() {
@@ -78,6 +71,7 @@ function updateUsername() {
   } else {
     alert("请输入新用户名");
   }
+  document.getElementById("greetingUser").textContent = "Hi, " + newUsername;
 }
 
 // 更新密码
@@ -132,7 +126,6 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
         break;
       case "user-profile":
         showProfilePage();
-        document.getElementById("pageTitle").textContent = "User Profile";
         break;
       case "my-book":
         document.getElementById("pageTitle").textContent = "My Book";
@@ -151,6 +144,13 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
   });
 });
 
+// 为“Log out”项添加点击事件监听器
+document
+  .getElementById("logoutItem")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.href = "signin.html";
+  });
 document.addEventListener("DOMContentLoaded", function () {
   // 模拟历史记录数据
   const historyData = [
