@@ -9,7 +9,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(200deg, #f4f4f4, #f3ddf7);
+  background: url("image\ copy.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .container {
@@ -53,7 +57,8 @@ a {
   font-size: 12px; /* 增大字体大小 */
   color: #f6f6f6;
   height: 12px;
-  margin-top: 20px; /* 调整位置，增加距离 */
+  margin-top: 15px; /* 调整位置，增加距离 */
+  margin-bottom: 10px;
 }
 
 a:hover {
@@ -68,6 +73,7 @@ a:hover {
 h1 {
   text-align: center;
   margin-bottom: 30px; /* 调整位置 */
+  margin-top: 40px;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 5px;
@@ -104,7 +110,7 @@ input:focus::placeholder {
 
 .from-box button {
   width: 70%;
-  margin-top: 40px; /* 调整位置 */
+  margin-top: 20px; /* 调整位置 */
   background-color: #f6f6f6;
   outline: none;
   border-radius: 8px;
@@ -113,6 +119,12 @@ input:focus::placeholder {
   letter-spacing: 2px;
   border: none;
   cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.register-box button {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .from-box button:hover {
@@ -127,7 +139,7 @@ input:focus::placeholder {
   align-items: center;
   justify-content: space-between; /* 两边对齐 */
   width: 70%; /* 调整宽度 */
-  margin-bottom: 15px; /* 往上移动 */
+  margin-bottom: 5px; /* 往上移动 */
 }
 
 /* 发送验证码按钮样式 */
@@ -146,6 +158,7 @@ input:focus::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .send-verification-code:hover {
@@ -167,7 +180,7 @@ input:focus::placeholder {
   margin-left: 10px; /* 调整间距 */
   font-size: 16px; /* 保持字体大小 */
   letter-spacing: 1.5px;
-  margin-top: 38px;
+  margin-bottom: 5px;
 }
 
 .check-email::placeholder {
@@ -246,4 +259,39 @@ input:focus::placeholder {
   margin: 10px 0;
   opacity: 0.9;
   position: flex;
+}
+
+/* 隐私政策复选框样式 */
+.privacy-policy {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平居中 */
+  margin-top: 0px; /* 减少上下间距 */
+  margin-bottom: 0px; /* 减少下方间距 */
+}
+
+.privacy-policy input[type="checkbox"] {
+  border: 1px solid #a262ad; /* 边框颜色 */
+  height: 20px; /* 高度 */
+  width: 20px; /* 宽度 */
+  background-color: #fff; /* 背景颜色 */
+  border-radius: 4px; /* 圆角 */
+  position: relative; /* 相对定位 */
+  cursor: pointer; /* 鼠标样式 */
+  margin-right: 8px; /* 右边距 */
+}
+
+.privacy-policy label {
+  font-size: 14px; /* 字体大小 */
+  color: #f6f6f6; /* 字体颜色 */
+}
+
+.privacy-policy label a {
+  color: #a262ad; /* 链接颜色 */
+  text-decoration: none; /* 去掉下划线 */
+  margin-left: 5px; /* 左边距 */
+}
+
+.privacy-policy label a:hover {
+  text-decoration: underline; /* 鼠标悬停时添加下划线 */
 }
