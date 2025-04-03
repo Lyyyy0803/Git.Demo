@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In / Sign Up</title>
     <link rel="stylesheet" href="index.css" />
@@ -17,8 +17,25 @@
           <input type="email" placeholder="Email Address" />
           <input type="password" placeholder="Password" />
           <input type="password" placeholder="Confirm Password" />
+          <div class="verification-container">
+            <button class="send-verification-code">Verification code</button>
+            <input
+              type="text"
+              class="check-email"
+              id="check-email"
+              placeholder=""
+            />
+          </div>
+          <div class="privacy-policy">
+            <input type="checkbox" id="agreeTermsRegister" required />
+            <label for="agreeTermsRegister"
+              >I agree to the
+              <a href="#" id="privacyPolicyLink">Privacy Policy</a></label
+            >
+          </div>
           <button>Create an account</button>
         </div>
+
         <!-- 登录 -->
         <div class="login-box">
           <h1>Login</h1>
@@ -27,8 +44,16 @@
           <a href="#" class="forget" id="forget-password"
             >Forget your password? <span>Retrieve password</span></a
           >
+          <div class="privacy-policy">
+            <input type="checkbox" id="agreeTermsLogin" required />
+            <label for="agreeTermsLogin"
+              >I agree to the
+              <a href="#" id="privacyPolicyLink">Privacy Policy</a></label
+            >
+          </div>
           <button>Login</button>
         </div>
+
         <!-- 忘记密码 -->
         <div class="forget-box hidden">
           <h1>Retrieve Password</h1>
@@ -36,9 +61,7 @@
           <input type="password" placeholder="Confirm Password" />
           <input type="email" placeholder="Email Address" />
           <div class="verification-container">
-            <button class="send-verification-code">
-              Send verification code
-            </button>
+            <button class="send-verification-code">Verification code</button>
             <input
               type="text"
               class="check-email"
@@ -110,11 +133,32 @@
           login_box.classList.remove("hidden");
           form_box.style.transform = "translateX(0%)";
         });
+
+        // 注册表单提交事件
+        document
+          .querySelector(".register-box button")
+          .addEventListener("click", function (event) {
+            const agreeTerms = document.getElementById("agreeTermsRegister");
+            if (!agreeTerms.checked) {
+              alert(
+                "You must agree to the Privacy Policy to create an account."
+              );
+              event.preventDefault(); // 阻止表单提交
+            }
+          });
+
+        // 登录表单提交事件
+        document
+          .querySelector(".login-box button")
+          .addEventListener("click", function (event) {
+            const agreeTerms = document.getElementById("agreeTermsLogin");
+            if (!agreeTerms.checked) {
+              alert("You must agree to the Privacy Policy to log in.");
+              event.preventDefault(); // 阻止表单提交
+            }
+          });
       </script>
     </div>
   </body>
 </html>
 
-    </div>
-  </body>
-</html>
