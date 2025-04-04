@@ -27,18 +27,24 @@ body {
   align-items: center;
   padding: 0 20px 20px;
   border-bottom: 1px solid #c9b5d9;
+  font-size: 26px;
+  font-weight: 700;
+  color: #7e3b8d;
 }
 
-.logo-img {
-  width: 50px;
+.logo-image {
+  width: 60px;
   height: 50px;
-  border-radius: 50%;
   margin-right: 10px;
 }
 
 .nav-links {
   list-style: none;
   padding: 20px 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center; /* 使导航栏文字居中 */
+  vertical-align: middle;
 }
 
 .nav-links li {
@@ -65,12 +71,39 @@ body {
   text-align: center;
 }
 
+/* 设置导航栏图片的样式 */
+.sidebar-image {
+  width: 100%; /* 图片宽度占满整个导航栏 */
+  height: auto; /* 保持图片比例 */
+  object-fit: cover; /* 确保图片填充整个区域 */
+  display: block; /* 去掉图片默认的行内元素特性 */
+  margin-bottom: 60px; /* 添加一些间距 */
+  margin-top: 40px;
+}
+
 /* 右侧内容区样式 */
 .content {
   flex: 1;
   padding: 20px 30px;
-  background-color: #f0e6f8;
+  background-color: #f0e6f8; /* 原有的背景颜色 */
+  position: relative; /* 设置为相对定位，以便伪元素定位 */
   overflow-y: auto;
+  z-index: 1; /* 确保内容在伪元素上方 */
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/image.png"); /* 添加背景图片 */
+  background-size: 550px; /* 调整图片大小 */
+  background-position: right bottom; /* 定位图片 */
+  background-repeat: no-repeat; /* 防止图片重复 */
+  opacity: 0.5; /* 设置透明度为50% */
+  z-index: -1; /* 确保背景图片在内容下方 */
 }
 
 .header {
@@ -78,13 +111,23 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  border-bottom: 1px solid #d8c4e3;
   padding-bottom: 15px;
+  position: relative; /* 添加相对定位 */
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  margin-top: 60px;
+  width: 100%; /* 横线宽度 */
+  height: 1px; /* 横线厚度 */
+  background-color: #d8c4e3; /* 横线颜色 */
 }
 
 .header h2 {
-  font-size: 28px;
+  font-size: 36px; /* 增加标题字号 */
   color: #a262ad;
+  padding: 15px;
 }
 
 .header-icons {
@@ -98,7 +141,14 @@ body {
 }
 
 .notification i {
-  font-size: 20px;
+  font-size: 28px;
+  color: #a262ad;
+  margin-right: 10px;
+}
+
+.notification span {
+  font-size: 28px;
+  font-weight: 700;
   color: #a262ad;
   margin-right: 10px;
 }
@@ -108,20 +158,24 @@ body {
   height: 40px;
   border-radius: 50%;
   margin-left: 15px;
+  margin-right: 15px;
 }
 
 /* 用户资料内容样式 */
 .profile-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 .avatar-upload {
   position: relative;
   margin-bottom: 30px;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
 }
 
 .avatar-placeholder {
@@ -133,7 +187,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  border: 2px solid #a262ad; /* 添加黑色边框 */
+  border: 2px solid #a262ad;
   cursor: pointer;
 }
 
@@ -155,7 +209,7 @@ body {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #a262ad; /* 添加黑色边框 */
+  border: 2px solid #a262ad; /* 添加紫色边框 */
   display: none;
 }
 
@@ -166,21 +220,23 @@ body {
 
 .profile-info h3 {
   margin-bottom: 20px;
-  color: #555;
-  font-size: 30px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .info-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 30px 0 5px;
   border-bottom: 1px solid #d8c4e3;
 }
 
 .info-item p {
-  font-size: 25px;
-  color: #333;
+  font-size: 23px;
+  font-weight: 600;
+  color: #a262ad;
   line-height: 1.5;
 }
 
@@ -189,44 +245,51 @@ body {
   border: none;
   color: #a262ad;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 600;
 }
-
-/* 修改用户名和密码页面样式 */
-.change-username-page,
-.change-password-page {
+/* 修改用户名页面样式 */
+.change-username-page {
   max-width: 600px;
-  margin: 0 auto;
+  margin-left: 20px; /* 改为向左对齐 */
   display: block;
+  padding: 20px;
 }
 
-.change-username-page h3,
-.change-password-page h3 {
+.change-username-page h3 {
   margin-bottom: 20px;
-  color: #333;
-  font-size: 25px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
 }
 
-.form-group {
+.change-username-form-group {
   margin-bottom: 25px;
 }
 
-.form-group label {
+.change-username-form-group label {
   display: block;
   margin-bottom: 10px;
-  color: #555;
-  font-size: 25px;
+  color: #a262ad;
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.form-group input {
+.change-username-form-group input {
   width: 100%;
   padding: 12px 15px;
   border: 1px solid #d8c4e3;
   border-radius: 4px;
-  font-size: 25px;
+  font-size: 18px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
 }
 
-.form-buttons {
+.change-username-form-group input:focus {
+  border-color: #a262ad;
+}
+
+.change-username-form-buttons {
   margin-top: 30px;
   display: flex;
   justify-content: flex-end;
@@ -238,7 +301,7 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 15px;
 }
 
@@ -251,6 +314,54 @@ body {
 .save-btn {
   background-color: #a262ad;
   color: white;
+}
+
+/* 修改密码页面样式 */
+.change-password-page {
+  max-width: 600px;
+  margin-left: 20px; /* 改为向左对齐 */
+  margin-top: -15px;
+  display: block;
+  padding: 20px;
+}
+
+.change-password-page h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.change-password-form-group {
+  margin-bottom: 25px;
+}
+
+.change-password-form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #a262ad;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.change-password-form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 18px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.change-password-form-group input:focus {
+  border-color: #a262ad;
+}
+
+.change-password-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* 响应式设计 */
@@ -282,6 +393,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: -5px;
 }
 
 .search-bar input[type="text"],
@@ -352,6 +464,18 @@ body {
 }
 
 /* 历史记录书籍样式 */
+.no-history-message {
+  display: flex; /* 使用Flexbox布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  text-align: center; /* 确保文本居中 */
+  font-size: 28px;
+  font-weight: 500;
+  color: #a262ad;
+  height: 100vh; /* 使容器占满整个视口高度 */
+  width: 100%; /* 使容器宽度占满整个视口宽度 */
+}
+
 .history-item h2 {
   color: #a262ad; /* 紫色 */
 }
@@ -383,4 +507,262 @@ body {
   font-size: 18px;
   color: #a262ad; /* 紫色 */
   margin-top: 20px;
+}
+
+/* My Book部分样式 */
+.my-book-page {
+  display: none;
+  width: 100%;
+  padding: 20px;
+}
+
+.favourite-section {
+  margin-bottom: 30px;
+}
+
+.favourite-section h3 {
+  margin-bottom: 20px;
+  margin-top: -35px;
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  position: relative;
+}
+
+.book-card {
+  background-color: #e4d0f5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.book-card .book-info {
+  padding: 10px;
+}
+
+.book-card .book-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book-card .book-author {
+  font-size: 12px;
+  color: #a262ad;
+}
+
+.add-book-btn {
+  width: 150px;
+  height: 200px;
+  background-color: #d8c4e3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-book-btn i {
+  font-size: 30px;
+  color: #a262ad;
+}
+
+/* 创建阅读日志表单样式 */
+.reading-log-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reading-log-form .form-container {
+  background-color: #f5f0f8;
+  border-radius: 8px;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reading-log-form h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.book-cover-upload {
+  width: 150px;
+  height: 200px;
+  background-color: #ece1f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.book-cover-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-placeholder i {
+  font-size: 30px;
+  color: #a262ad;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #a262ad;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #a262ad;
+}
+
+.form-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #a262ad;
+  border: 1px solid #a262ad;
+}
+
+.save-btn {
+  background-color: #a262ad;
+  color: white;
+}
+
+@media (max-width: 1200px) {
+  .book-card {
+    flex: 0 0 calc(25% - 20px); /* 每行显示4个 */
+  }
+}
+
+@media (max-width: 992px) {
+  .book-card {
+    flex: 0 0 calc(33.333% - 20px); /* 每行显示3个 */
+  }
+}
+
+@media (max-width: 768px) {
+  .book-card {
+    flex: 0 0 calc(50% - 20px); /* 每行显示2个 */
+  }
+}
+
+@media (max-width: 576px) {
+  .book-card {
+    flex: 0 0 100%; /* 每行显示1个 */
+  }
+}
+
+.reading-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reading-details-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reading-details-content h3 {
+  margin-bottom: 15px;
+  color: #a262ad;
+}
+
+.reading-details-content p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.reading-details-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #a262ad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
