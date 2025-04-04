@@ -15,12 +15,8 @@
       <!-- 左侧导航栏 -->
       <div class="sidebar">
         <div class="logo">
-          <img
-            src="https://via.placeholder.com/50"
-            alt="Logo"
-            class="logo-img"
-          />
-          <span>LOGO NAME</span>
+          <img src="img/logo.png" alt="Logo" class="logo-image" />
+          <span>Daily Reading</span>
         </div>
         <ul class="nav-links">
           <li data-page="home">
@@ -47,6 +43,7 @@
             <i class="fas fa-cog"></i>
             <span>Settings</span>
           </li>
+          <img src="img/bar.png" alt="Sidebar Image" class="sidebar-image" />
           <li data-page="log-out" id="logoutItem">
             <i class="fas fa-sign-out-alt"></i>
             <span>Log out</span>
@@ -137,9 +134,9 @@
             </div>
             <select id="filter-select">
               <option value="all">All</option>
-              <option value="week">Last 7 Days</option>
-              <option value="month">Last 30 Days</option>
-              <option value="year">Last Year</option>
+              <option value="week">7 Days</option>
+              <option value="month">A month</option>
+              <option value="year">A Year</option>
             </select>
             <input type="date" id="start-date" placeholder="Start date" />
             <span class="date-separator">
@@ -147,95 +144,163 @@
             </span>
             <input type="date" id="end-date" placeholder="End date" />
           </div>
-          <div class="history" id="history"></div>
+          <div class="history" id="history">
+            <div class="no-history-message" style="display: none;"></div>
+          </div>
         </div>
 
         <!-- 修改用户名页面 -->
-        <div
-          class="change-username-page"
-          id="changeUsernamePage"
-          style="display: none"
-        >
-          <h3>Change User Name</h3>
-          <div class="form-group">
-            <label for="newUsername">New User Name</label>
-            <input
-              type="text"
-              id="newUsername"
-              name="newUsername"
-              placeholder="Enter new username"
-            />
-          </div>
-          <div class="form-buttons">
-            <button
-              type="button"
-              class="cancel-btn"
-              onclick="showProfilePage()"
-            >
-              Return
-            </button>
-            <button type="button" class="save-btn" onclick="updateUsername()">
-              Update
-            </button>
-          </div>
-        </div>
+<div class="change-username-page" id="changeUsernamePage" style="display: none">
+  <h3>Change User Name</h3>
+  <div class="change-username-form-group">
+    <label for="newUsername">New User Name</label>
+    <input
+      type="text"
+      id="newUsername"
+      name="newUsername"
+      placeholder="Enter new username"
+    />
+  </div>
+  <div class="change-username-form-buttons">
+    <button type="button" class="cancel-btn" onclick="showProfilePage()">
+      Return
+    </button>
+    <button type="button" class="save-btn" onclick="updateUsername()">
+      Update
+    </button>
+  </div>
+</div>
 
-        <!-- 修改密码页面 -->
-        <div
-          class="change-password-page"
-          id="changePasswordPage"
-          style="display: none"
-        >
-          <h3>Change Password</h3>
-          <div class="form-group">
-            <button
-              type="button"
-              class="save-btn"
-              onclick="sendVerificationCode()"
-            >
-              Send Verification Code
-            </button>
+<!-- 修改密码页面 -->
+<div class="change-password-page" id="changePasswordPage" style="display: none">
+  <h3>Change Password</h3>
+  <div class="change-password-form-group">
+    <button
+      type="button"
+      class="save-btn"
+      onclick="sendVerificationCode()"
+    >
+      Send Verification Code
+    </button>
+  </div>
+  <div class="change-password-form-group">
+    <label for="verificationCode">Verification Code</label>
+    <input
+      type="text"
+      id="verificationCode"
+      name="verificationCode"
+      placeholder="Enter verification code"
+    />
+  </div>
+  <div class="change-password-form-group">
+    <label for="newPassword">New Password</label>
+    <input
+      type="password"
+      id="newPassword"
+      name="newPassword"
+      placeholder="Enter new password"
+    />
+  </div>
+  <div class="change-password-form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      placeholder="Confirm new password"
+    />
+  </div>
+  <div class="change-password-form-buttons">
+    <button type="button" class="cancel-btn" onclick="showProfilePage()">
+      Return
+    </button>
+    <button type="button" class="save-btn" onclick="updatePassword()">
+      Update
+    </button>
+  </div>
+</div>
+
+          <!-- My Book 页面 -->
+          <div class="my-book-page" id="myBookPage" style="display: none">
+            <div class="favourite-section">
+              <h3>My favourite ❤️</h3>
+              <div class="book-grid" id="favouriteBooks">
+                <!-- 书籍卡片将通过JavaScript动态添加 -->
+              </div>
+              <div class="add-book-btn" onclick="showReadingLogForm()">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="verificationCode">Verification Code</label>
+        </div>
+      </div>
+  
+      <!-- 阅读记录详情页面 -->
+      <div class="reading-details" id="readingDetails" style="display: none">
+        <div class="reading-details-content">
+          <h3 id="detailTitle"></h3>
+          <p id="detailAuthor"></p>
+          <p id="detailDate"></p>
+          <p id="detailReview"></p>
+          <button onclick="closeReadingDetails()">Close</button>
+        </div>
+      </div>
+  
+      <!-- 创建阅读日志表单 -->
+      <div class="reading-log-form" id="readingLogForm" style="display: none">
+        <div class="form-container">
+          <h3>Create a reading log</h3>
+          <div class="book-cover-upload">
+            <img
+              src=""
+              alt="Book Cover"
+              id="bookCoverPreview"
+              style="display: none"
+            />
+            <div class="upload-placeholder" id="uploadPlaceholder">
+              <i class="fas fa-plus"></i>
+            </div>
             <input
-              type="text"
-              id="verificationCode"
-              name="verificationCode"
-              placeholder="Enter verification code"
+              type="file"
+              id="bookCoverUpload"
+              accept="image/*"
+              style="display: none"
             />
           </div>
           <div class="form-group">
-            <label for="newPassword">New Password</label>
-            <input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              placeholder="Enter new password"
-            />
+            <label for="bookTitle">Title:</label>
+            <input type="text" id="bookTitle" placeholder="Enter book title" />
           </div>
           <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm new password"
-            />
+            <label for="bookAuthor">Author:</label>
+            <input type="text" id="bookAuthor" placeholder="Enter author name" />
+          </div>
+          <div class="form-group">
+            <label for="readingDate">Reading Date:</label>
+            <input type="date" id="readingDate" />
+          </div>
+          <div class="form-group">
+            <label for="bookReview">Review:</label>
+            <textarea
+              id="bookReview"
+              rows="5"
+              placeholder="Write your review here..."
+            ></textarea>
           </div>
           <div class="form-buttons">
             <button
               type="button"
               class="cancel-btn"
-              onclick="showProfilePage()"
+              onclick="hideReadingLogForm()"
             >
-              Return
+              Cancel
             </button>
-            <button type="button" class="save-btn" onclick="updatePassword()">
-              Update
+            <button type="button" class="save-btn" onclick="createReadingLog()">
+              Create
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
 
