@@ -30,6 +30,7 @@ function showChangeUsernamePage() {
   document.getElementById("changeUsernamePage").style.display = "block";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("myBookPage").style.display = "none";
   document.getElementById("pageTitle").textContent = "Edit Profile";
 }
 
@@ -39,6 +40,7 @@ function showChangePasswordPage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "block";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("myBookPage").style.display = "none";
   document.getElementById("pageTitle").textContent = "Edit Profile";
 }
 
@@ -48,6 +50,7 @@ function showReadingHistoryPage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "block";
+  document.getElementById("myBookPage").style.display = "none";
   document.getElementById("pageTitle").textContent = "Reading History";
 }
 
@@ -57,7 +60,18 @@ function showProfilePage() {
   document.getElementById("changeUsernamePage").style.display = "none";
   document.getElementById("changePasswordPage").style.display = "none";
   document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("myBookPage").style.display = "none";
   document.getElementById("pageTitle").textContent = "Edit Profile";
+}
+
+// 显示 My Book 页面
+function showMyBookPage() {
+  document.getElementById("profilePage").style.display = "none";
+  document.getElementById("changeUsernamePage").style.display = "none";
+  document.getElementById("changePasswordPage").style.display = "none";
+  document.getElementById("readingHistoryPage").style.display = "none";
+  document.getElementById("myBookPage").style.display = "block";
+  document.getElementById("pageTitle").textContent = "My Book";
 }
 
 // 更新用户名
@@ -118,6 +132,7 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
     document.getElementById("changeUsernamePage").style.display = "none";
     document.getElementById("changePasswordPage").style.display = "none";
     document.getElementById("readingHistoryPage").style.display = "none";
+    document.getElementById("myBookPage").style.display = "none";
 
     // 显示对应页面并更新页面标题
     switch (pageId) {
@@ -128,6 +143,7 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
         showProfilePage();
         break;
       case "my-book":
+        showMyBookPage();
         document.getElementById("pageTitle").textContent = "My Book";
         break;
       case "goal-setting":
@@ -151,36 +167,8 @@ document
     event.preventDefault();
     window.location.href = "signin.html";
   });
-document.addEventListener("DOMContentLoaded", function () {
-  // 模拟历史记录数据
-  const historyData = [
-    {
-      date: new Date().toISOString().slice(0, 10), // 今天的日期
-      books: [
-        { cover: "img/book1.png", title: "" },
-        { cover: "img/book2.png", title: "" },
-      ],
-    },
-    {
-      date: new Date(new Date().getTime() - 24 * 3600 * 1000)
-        .toISOString()
-        .slice(0, 10), // 昨天的日期
-      books: [
-        { cover: "img/book3.png", title: "" },
-        { cover: "img/book2.png", title: "" },
-      ],
-    },
-    {
-      date: new Date(new Date().getTime() - 48 * 3600 * 1000)
-        .toISOString()
-        .slice(0, 10), // 前天的日期
-      books: [
-        { cover: "img/book1.png", title: "" },
-        { cover: "img/book3.png", title: "" },
-      ],
-    },
-  ];
 
+document.addEventListener("DOMContentLoaded", function () {
   // 获取历史记录容器
   const historyContainer = document.getElementById("history");
 
@@ -192,14 +180,14 @@ document.addEventListener("DOMContentLoaded", function () {
       // 如果没有历史记录，显示提示信息
       const noHistoryMessage = document.createElement("div");
       noHistoryMessage.classList.add("no-history-message");
-      noHistoryMessage.textContent = "无历史记录";
+      noHistoryMessage.textContent =
+        "There is no historical record for the time being.";
       historyContainer.appendChild(noHistoryMessage);
     } else {
       // 如果有历史记录，正常渲染
       data.forEach((item) => {
         const historyItem = document.createElement("div");
         historyItem.classList.add("history-item");
-        historyItem.style.display = "block";
 
         const dateHeader = document.createElement("h2");
         dateHeader.textContent = item.date;
@@ -230,10 +218,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // 从服务器获取历史记录
+  function fetchHistory() {
+    fetch("/api/history") // 假设您的API端点是'/api/history'
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        renderHistory(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching history:", error);
+        const noHistoryMessage = document.createElement("div");
+        noHistoryMessage.classList.add("no-history-message");
+        noHistoryMessage.textContent = "Failed to load history.";
+        historyContainer.appendChild(noHistoryMessage);
+      });
+  }
+
   // 筛选历史记录
   function filterHistory() {
     const filterValue = document.getElementById("filter-select").value;
-    let filteredData;
+    let filteredData = historyData;
 
     switch (filterValue) {
       case "week":
@@ -273,18 +282,15 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("change", filterHistory);
 
   // 初始化渲染全部历史记录
-  renderHistory(historyData);
-});
+  fetchHistory();
 
-document.addEventListener("DOMContentLoaded", function () {
   // 监听搜索按钮的点击事件
   document
     .getElementById("search-button")
     .addEventListener("click", function () {
-      const searchInput = document.getElementById("searchInput").value;
-      const filterSelect = document.getElementById("filter-select").value;
-      const startDate = document.getElementById("start-date").value;
-      const endDate = document.getElementById("end-date").value;
+      const searchInput = document
+        .getElementById("searchInput")
+        .value.toLowerCase();
       const historyItems = document.querySelectorAll(".history-item");
 
       // 默认显示所有历史记录
@@ -292,41 +298,13 @@ document.addEventListener("DOMContentLoaded", function () {
         item.style.display = "block";
       });
 
-      // 根据筛选条件隐藏历史记录
-      if (filterSelect === "today") {
-        document
-          .querySelectorAll(".history-item:not(:first-child)")
-          .forEach((item) => {
-            item.style.display = "none";
-          });
-      } else if (filterSelect === "week") {
-        document
-          .querySelectorAll(".history-item:not(:nth-child(-n+2))")
-          .forEach((item) => {
-            item.style.display = "none";
-          });
-      } else if (filterSelect === "month") {
-        document
-          .querySelectorAll(".history-item:not(:nth-child(-n+3))")
-          .forEach((item) => {
-            item.style.display = "none";
-          });
-      }
-
-      // 如果提供了开始和结束日期，则进一步筛选
-      if (startDate && endDate) {
-        console.log(`Filtering between ${startDate} and ${endDate}`);
-        // 在这里添加日期筛选逻辑
-      }
-
       // 如果搜索框有内容，则进一步筛选
       if (searchInput) {
-        const searchLowercase = searchInput.toLowerCase();
         historyItems.forEach((item) => {
           const bookTitles = Array.from(item.querySelectorAll("span")).map(
             (el) => el.textContent.toLowerCase()
           );
-          if (bookTitles.some((title) => title.includes(searchLowercase))) {
+          if (bookTitles.some((title) => title.includes(searchInput))) {
             item.style.display = "block";
           } else {
             item.style.display = "none";
@@ -335,3 +313,125 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 });
+
+// 显示创建阅读日志表单
+function showReadingLogForm() {
+  document.getElementById("readingLogForm").style.display = "flex";
+}
+
+// 隐藏创建阅读日志表单
+function hideReadingLogForm() {
+  document.getElementById("readingLogForm").style.display = "none";
+}
+
+// 创建阅读日志
+function createReadingLog() {
+  const bookTitle = document.getElementById("bookTitle").value;
+  const bookAuthor = document.getElementById("bookAuthor").value;
+  const readingDate = document.getElementById("readingDate").value;
+  const bookReview = document.getElementById("bookReview").value;
+  const bookCover = document.getElementById("bookCoverPreview").src;
+
+  if (!bookTitle || !bookAuthor || !readingDate) {
+    alert("请填写书名、作者和阅读日期");
+    return;
+  }
+
+  // 创建书籍卡片
+  const bookCard = document.createElement("div");
+  bookCard.className = "book-card";
+  bookCard.dataset.title = bookTitle;
+  bookCard.dataset.author = bookAuthor;
+  bookCard.dataset.date = readingDate;
+  bookCard.dataset.review = bookReview;
+  bookCard.dataset.cover = bookCover;
+  bookCard.innerHTML = `
+    <img src="${
+      bookCover || "https://via.placeholder.com/200"
+    }" alt="${bookTitle}">
+    <div class="book-info">
+      <div class="book-title">${bookTitle}</div>
+      <div class="book-author">${bookAuthor}</div>
+    </div>
+  `;
+
+  // 添加点击事件
+  bookCard.addEventListener("click", function () {
+    showReadingDetails(
+      this.dataset.title,
+      this.dataset.author,
+      this.dataset.date,
+      this.dataset.review
+    );
+  });
+
+  // 获取书籍网格
+  const favouriteBooks = document.getElementById("favouriteBooks");
+
+  // 将按钮移到最后
+  const addBookBtn = document.querySelector(".add-book-btn");
+  if (addBookBtn) {
+    favouriteBooks.appendChild(addBookBtn);
+  }
+
+  // 添加书籍卡片
+  favouriteBooks.insertBefore(bookCard, addBookBtn);
+
+  // 将数据存储到 localStorage
+  const bookData = {
+    title: bookTitle,
+    author: bookAuthor,
+    date: readingDate,
+    review: bookReview,
+    cover: bookCover,
+  };
+  const books = JSON.parse(localStorage.getItem("books") || "[]");
+  books.push(bookData);
+  localStorage.setItem("books", JSON.stringify(books));
+
+  // 隐藏表单并重置输入
+  hideReadingLogForm();
+  document.getElementById("bookTitle").value = "";
+  document.getElementById("bookAuthor").value = "";
+  document.getElementById("readingDate").value = "";
+  document.getElementById("bookReview").value = "";
+  document.getElementById("bookCoverPreview").style.display = "none";
+  document.getElementById("uploadPlaceholder").style.display = "flex";
+}
+
+// 显示阅读记录详情
+function showReadingDetails(title, author, date, review) {
+  document.getElementById("detailTitle").textContent = title;
+  document.getElementById("detailAuthor").textContent = `Author: ${author}`;
+  document.getElementById("detailDate").textContent = `Reading Date: ${date}`;
+  document.getElementById("detailReview").textContent = `Review: ${review}`;
+  document.getElementById("readingDetails").style.display = "flex";
+}
+
+// 关闭阅读记录详情
+function closeReadingDetails() {
+  document.getElementById("readingDetails").style.display = "none";
+}
+
+// 上传书籍封面
+document
+  .getElementById("bookCoverUpload")
+  .addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("bookCoverPreview").src = e.target.result;
+        document.getElementById("bookCoverPreview").style.display = "block";
+        document.getElementById("uploadPlaceholder").style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+// 点击加号按钮触发文件选择
+document
+  .getElementById("uploadPlaceholder")
+  .addEventListener("click", function () {
+    document.getElementById("bookCoverUpload").click();
+  });
