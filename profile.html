@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
@@ -19,11 +19,11 @@
           <span>Daily Reading</span>
         </div>
         <ul class="nav-links">
-          <li data-page="home">
+          <li data-page="home" class="active">
             <i class="fas fa-home"></i>
             <span>Home</span>
           </li>
-          <li data-page="user-profile" class="active">
+          <li data-page="user-profile">
             <i class="fas fa-user"></i>
             <span>User Profile</span>
           </li>
@@ -39,13 +39,14 @@
             <i class="fas fa-history"></i>
             <span>Reading History</span>
           </li>
-          <li data-page="admin">
-            <i class="fas fa-user-secret"></i>
-            <span>Admin</span>
-          </li>
           <li data-page="settings">
             <i class="fas fa-cog"></i>
             <span>Settings</span>
+          </li>
+          <!-- 为管理员添加导航入口 -->
+          <li data-page="admin">
+            <i class="fas fa-user-secret"></i>
+            <span>Administrator</span>
           </li>
           <img src="img/bar.png" alt="Sidebar Image" class="sidebar-image" />
           <li data-page="log-out" id="logoutItem">
@@ -54,50 +55,39 @@
           </li>
         </ul>
       </div>
-
       <!-- 右侧内容区 -->
       <div class="content">
         <div class="header">
-          <h2 id="pageTitle">Edit Profile</h2>
+          <h2 id="pageTitle">HOME</h2>
           <div class="header-icons">
             <div class="notification">
               <i class="fas fa-bell"></i>
-              <span id="greetingUser">Hi, User</span>
+              <span id="greetingUser">Hi 👋</span>
             </div>
             <div class="user-avatar">
               <img
-                src="https://via.placeholder.com/40"
+                src="https://placehold.co/40"
                 alt="User Avatar"
                 id="headerAvatar"
               />
             </div>
           </div>
         </div>
-
         <!-- 首页内容 -->
         <div class="home-page" id="homePage" style="display: none">
           <div id="homeContent">
-            <div class="header">
-              <h2 id="pageTitle">HOME</h2>
-              <div class="header-icons">
-                <div class="notification">
-                  <i class="fas fa-bell"></i>
-                  <span id="greetingUser">Hi, User</span>
-                </div>
-                <div class="user-avatar">
-                  <img src="https://placehold.co/40" alt="User Avatar" id="headerAvatar" />
-                </div>
-              </div>
-            </div>
-            <div class="search-container">
+            <div class="search-container1">
               <div class="search-box">
-                <input type="text" placeholder="search something you interesting in" />
+                <input
+                  type="text"
+                  placeholder="Search something you interesting in......"
+                />
                 <button class="search-icon">
                   <i class="fas fa-search"></i>
                 </button>
               </div>
             </div>
-            <div class="section-title">Recommended Books:</div>
+            <div class="section-title">Recommended Books</div>
             <div class="book-grid">
               <div class="book-card" onclick="showBookDetails()">
                 <img src="https://placehold.co/230x230" alt="Book Cover" />
@@ -114,7 +104,11 @@
             </div>
           </div>
           <!-- 书籍详情页 -->
-          <div class="book-details-page" id="bookDetailsPage" style="display: none">
+          <div
+            class="book-details-page"
+            id="bookDetailsPage"
+            style="display: none"
+          >
             <div class="book-details-content">
               <div class="book-details-header">
                 <h2>Book Details</h2>
@@ -173,7 +167,6 @@
             </div>
           </div>
         </div>
-
         <!-- 用户资料页面 -->
         <div class="profile-page" id="profilePage">
           <div class="profile-content">
@@ -197,7 +190,6 @@
                 style="display: none"
               />
             </div>
-
             <div class="profile-info">
               <h3>User Profile</h3>
               <div class="info-item">
@@ -220,72 +212,56 @@
         </div>
 
         <!-- setting更新 -->
-       <div class="settings-page" id="settingsPage" style="display: none">
-        <div class="header">
-          <h2 id="pageTitle">Settings</h2>
-          <div class="header-icons">
-            <div class="notification">
-              <i class="fas fa-bell"></i>
-              <span id="greetingUser">Hi, User</span>
-              </div>
-            <div class="user-avatar">
-              <img src="https://placehold.co/40" alt="User Avatar" id="headerAvatar" />
-              </div>
-          </div>
-        </div>
-
-        <div class="settings-content">
-          <h3>General Settings</h3>
-          <div class="settings-item">
-            <p>Language</p>
-            <button class="edit-btn" onclick="handleLanguageSetting()">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-          <div class="settings-item">
-            <p>Privacy</p>
-            <button class="edit-btn" onclick="showPrivacyModal()">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="privacy-modal-overlay" id="privacyModalOverlay" style="display: none;">
-          <div class="privacy-modal-content">
-            <h4>Privacy Notice</h4>
-            <p>
-              Your privacy is important to us. This notice explains how we collect,
-              use, and protect your personal information when you use the Daily Reading app.
-              We collect information you provide, such as your username, email, reading goals,
-              and history to personalize your experience and improve our services. We do not
-              share your personal data with third parties without your explicit consent, except
-              as required by law. We implement security measures to protect your data.
-              By using this app, you consent to our data practices as described here.
-            </p>
-            <button class="modal-close-btn" onclick="hidePrivacyModal()">
-              Acknowledge and Agree
-            </button>
-          </div>
-        </div>
-      </div>
-
-        <!-- Goal Setting 页面 -->
-        <div class="goal-setting-page" id="goalSettingPage" style="display: none">
-          <div class="header">
-            <h2 id="pageTitle">Goal Setting</h2>
-            <div class="header-icons">
-              <div class="notification">
-                <i class="fas fa-bell"></i>
-                <span id="greetingUser">Hi, User</span>
-              </div>
-              <div class="user-avatar">
-                <img src="https://placehold.co/40" alt="User Avatar" id="headerAvatar" />
-              </div>
+        <div class="settings-page" id="settingsPage" style="display: none">
+          <div class="settings-content">
+            <h3>General Settings</h3>
+            <div class="settings-item">
+              <p>Language</p>
+              <button class="edit-btn" onclick="handleLanguageSetting()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="settings-item">
+              <p>Privacy</p>
+              <button class="edit-btn" onclick="showPrivacyModal()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
           </div>
+
+          <div
+            class="privacy-modal-overlay"
+            id="privacyModalOverlay"
+            style="display: none"
+          >
+            <div class="privacy-modal-content">
+              <h4>Privacy Notice</h4>
+              <p>
+                Your privacy is important to us. This notice explains how we
+                collect, use, and protect your personal information when you use
+                the Daily Reading app. We collect information you provide, such
+                as your username, email, reading goals, and history to
+                personalize your experience and improve our services. We do not
+                share your personal data with third parties without your
+                explicit consent, except as required by law. We implement
+                security measures to protect your data. By using this app, you
+                consent to our data practices as described here.
+              </p>
+              <button class="modal-close-btn" onclick="hidePrivacyModal()">
+                Acknowledge and Agree
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Goal Setting 页面 -->
+        <div
+          class="goal-setting-page"
+          id="goalSettingPage"
+          style="display: none"
+        >
           <div class="goal-management">
             <div class="goal-board" id="goalBoard">
-              <h3>My Goals</h3>
               <div class="goal-grid" id="goalGrid">
                 <!-- 目标卡片将通过 JavaScript 动态添加 -->
               </div>
@@ -294,54 +270,70 @@
             <div class="goal-form">
               <div class="form-group">
                 <label for="goalName">Goal Name</label>
-                <input type="text" id="goalName" placeholder="Enter goal name">
+                <input
+                  type="text"
+                  id="goalName"
+                  placeholder="Enter goal name"
+                />
               </div>
               <div class="form-group">
                 <label>Measurement</label>
                 <div class="measurement-select">
-                  <button class="measurement-btn active" data-unit="pages">Pages</button>
-                  <button class="measurement-btn" data-unit="minutes">Minutes</button>
+                  <button class="measurement-btn active" data-unit="pages">
+                    Pages
+                  </button>
+                  <button class="measurement-btn" data-unit="minutes">
+                    Minutes
+                  </button>
                 </div>
               </div>
               <div class="form-group">
                 <label for="targetValue">Target Value</label>
-                <input type="number" id="targetValue" placeholder="Enter target value">
+                <input
+                  type="number"
+                  id="targetValue"
+                  placeholder="Enter target value"
+                />
               </div>
               <div class="date-group">
                 <div class="form-group">
                   <label for="startDate">Start Date</label>
-                  <input type="date" id="startDate">
+                  <input type="date" id="startDate" />
                 </div>
                 <div class="form-group">
                   <label for="endDate">End Date</label>
-                  <input type="date" id="endDate">
+                  <input type="date" id="endDate" />
                 </div>
               </div>
               <div class="cover-upload">
                 <div class="upload-preview" id="goalCoverPreview"></div>
-                <input type="file" id="goalCoverUpload" accept="image/*" hidden>
-                <button class="upload-btn" onclick="document.getElementById('goalCoverUpload').click()">
+                <input
+                  type="file"
+                  id="goalCoverUpload"
+                  accept="image/*"
+                  hidden
+                />
+                <button
+                  class="upload-btn"
+                  onclick="document.getElementById('goalCoverUpload').click()"
+                >
                   <i class="fas fa-upload"></i> Upload Cover
                 </button>
               </div>
               <div class="form-buttons">
-                <button class="cancel-btn" onclick="clearGoalForm()">Clear</button>
-                <button class="save-btn" onclick="createNewGoal()">Create Goal</button>
+                <button class="cancel-btn" onclick="clearGoalForm()">
+                  Clear
+                </button>
+                <button class="save-btn" onclick="createNewGoal()">
+                  Create Goal
+                </button>
               </div>
-              <!-- 内部的 Settings 页面（此处如果是已有代码，可保留或删除，根据需求） -->
-              <div class="settings-page" id="settingsPage" style="display: none">
-                <div class="header">
-                  <h2 id="pageTitle">Settings</h2>
-                  <div class="header-icons">
-                    <div class="notification">
-                      <i class="fas fa-bell"></i>
-                      <span id="greetingUser">Hi, User</span>
-                    </div>
-                    <div class="user-avatar">
-                      <img src="https://placehold.co/40" alt="User Avatar" id="headerAvatar" />
-                    </div>
-                  </div>
-                </div>
+              <!-- 内部的 Settings 页面 -->
+              <div
+                class="settings-page"
+                id="settingsPage"
+                style="display: none"
+              >
                 <div class="settings-content">
                   <h3>General Settings</h3>
                   <div class="settings-item">
@@ -357,33 +349,147 @@
                     </button>
                   </div>
                 </div>
-                <div class="privacy-modal-overlay" id="privacyModalOverlay" style="display: none;">
+                <div
+                  class="privacy-modal-overlay"
+                  id="privacyModalOverlay"
+                  style="display: none"
+                >
                   <div class="privacy-modal-content">
                     <h4>Privacy Notice</h4>
                     <p>
-                      Your privacy is important to us. This notice explains how we collect,
-                      use, and protect your personal information when you use the Daily Reading app.
-                      We collect information you provide, such as your username, email, reading goals,
-                      and history to personalize your experience and improve our services. We do not
-                      share your personal data with third parties without your explicit consent, except
-                      as required by law. We implement security measures to protect your data.
-                      By using this app, you consent to our data practices as described here.
+                      Your privacy is important to us. This notice explains how
+                      we collect, use, and protect your personal information
+                      when you use the Daily Reading app. We collect information
+                      you provide, such as your username, email, reading goals,
+                      and history to personalize your experience and improve our
+                      services. We do not share your personal data with third
+                      parties without your explicit consent, except as required
+                      by law. We implement security measures to protect your
+                      data. By using this app, you consent to our data practices
+                      as described here.
                     </p>
-                    <button class="modal-close-btn" onclick="hidePrivacyModal()">
+                    <button
+                      class="modal-close-btn"
+                      onclick="hidePrivacyModal()"
+                    >
                       Acknowledge and Agree
                     </button>
                   </div>
                 </div>
               </div>
+              <!-- End 内部的 Settings 页面 -->
             </div>
           </div>
         </div>
-
-        <!--管理员用户管理页面-->
-        <div class="admin-user-management" id="adminUserManagement" style="display: none">
-        
+        <!-- 修改用户名页面 -->
+        <div
+          class="change-username-page"
+          id="changeUsernamePage"
+          style="display: none"
+        >
+          <h3>Change User Name</h3>
+          <div class="change-username-form-group">
+            <label for="newUsername">New User Name</label>
+            <input
+              type="text"
+              id="newUsername"
+              name="newUsername"
+              placeholder="Enter new username"
+            />
+          </div>
+          <div class="change-username-form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="showProfilePage()"
+            >
+              Return
+            </button>
+            <button type="button" class="save-btn" onclick="updateUsername()">
+              Update
+            </button>
+          </div>
+        </div>
+        <!-- 修改密码页面 -->
+        <div
+          class="change-password-page"
+          id="changePasswordPage"
+          style="display: none"
+        >
+          <h3>Change Password</h3>
+          <div class="change-password-form-group">
+            <button
+              type="button"
+              class="save-btn"
+              onclick="sendVerificationCode()"
+            >
+              Send Verification Code
+            </button>
+          </div>
+          <div class="change-password-form-group">
+            <label for="verificationCode">Verification Code</label>
+            <input
+              type="text"
+              id="verificationCode"
+              name="verificationCode"
+              placeholder="Enter verification code"
+            />
+          </div>
+          <div class="change-password-form-group">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div class="change-password-form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm new password"
+            />
+          </div>
+          <div class="change-password-form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="showProfilePage()"
+            >
+              Return
+            </button>
+            <button type="button" class="save-btn" onclick="updatePassword()">
+              Update
+            </button>
+          </div>
+        </div>
+        <!-- My Book 页面 -->
+        <div class="my-book-page" id="myBookPage" style="display: none">
+          <div class="favourite-section">
+            <h3>My favourite ❤️</h3>
+            <div class="book-grid" id="favouriteBooks">
+              <!-- 书籍卡片将通过JavaScript动态添加 -->
+            </div>
+            <div class="add-book-btn" onclick="showReadingLogForm()">
+              <i class="fas fa-plus"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ↓↓↓ 管理员用户管理页面插入处 ↓↓↓ -->
+        <div
+          class="admin-user-management"
+          id="adminUserManagement"
+          style="display: none"
+        >
           <!-- 用户阅读记录弹窗 -->
-          <div class="admin-modal-overlay" id="adminModalOverlay" style="display: none;">
+          <div
+            class="admin-modal-overlay"
+            id="adminModalOverlay"
+            style="display: none"
+          >
             <div class="admin-modal-content">
               <h4>Reading Records for <span id="modalUsername"></span></h4>
               <div class="records-list" id="recordsList">
@@ -394,9 +500,13 @@
               </button>
             </div>
           </div>
-  
+
           <!-- Ban用户弹窗 -->
-          <div class="admin-modal-overlay" id="banModalOverlay" style="display: none;">
+          <div
+            class="admin-modal-overlay"
+            id="banModalOverlay"
+            style="display: none"
+          >
             <div class="admin-modal-content">
               <h4>Manage User: <span id="banModalUsername"></span></h4>
               <div class="ban-form">
@@ -404,11 +514,16 @@
                   <label>User Status:</label>
                   <div class="radio-group">
                     <label>
-                      <input type="radio" name="userStatus" value="active" checked>
+                      <input
+                        type="radio"
+                        name="userStatus"
+                        value="active"
+                        checked
+                      />
                       Active
                     </label>
                     <label>
-                      <input type="radio" name="userStatus" value="banned">
+                      <input type="radio" name="userStatus" value="banned" />
                       Banned
                     </label>
                   </div>
@@ -417,79 +532,131 @@
                   <label for="banReason">Ban Reason (required):</label>
                   <select id="banReason" class="ban-reason-select">
                     <option value="">Select a reason</option>
-                    <option value="inappropriate_content">Inappropriate Content</option>
+                    <option value="inappropriate_content">
+                      Inappropriate Content
+                    </option>
                     <option value="spam">Spam</option>
                     <option value="harassment">Harassment</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
-                <div class="form-group" id="customReasonGroup" style="display: none;">
+                <div
+                  class="form-group"
+                  id="customReasonGroup"
+                  style="display: none"
+                >
                   <label for="customReason">Please specify:</label>
                   <textarea id="customReason" rows="3"></textarea>
                 </div>
               </div>
               <div class="modal-buttons">
-                <button class="modal-cancel-btn" onclick="hideBanModal()">Cancel</button>
-                <button class="modal-confirm-btn" onclick="confirmBanAction()">Confirm</button>
+                <button class="modal-cancel-btn" onclick="hideBanModal()">
+                  Cancel
+                </button>
+                <button class="modal-confirm-btn" onclick="confirmBanAction()">
+                  Confirm
+                </button>
               </div>
             </div>
           </div>
-  
+
           <!-- 管理员权限弹窗 -->
-          <div class="admin-modal-overlay" id="adminPrivilegeModalOverlay" style="display: none;">
+          <div
+            class="admin-modal-overlay"
+            id="adminPrivilegeModalOverlay"
+            style="display: none"
+          >
             <div class="admin-modal-content">
-              <h4>Admin Privileges for <span id="adminPrivilegeUsername"></span></h4>
+              <h4>
+                Admin Privileges for <span id="adminPrivilegeUsername"></span>
+              </h4>
               <div class="admin-privilege-form">
                 <div class="form-group">
-                  <p><strong>Your Admin Level:</strong> <span id="currentAdminLevel">Super Admin</span></p>
+                  <p>
+                    <strong>Your Admin Level:</strong>
+                    <span id="currentAdminLevel">Super Admin</span>
+                  </p>
                 </div>
                 <div class="form-group" id="privilegeOptions">
                   <label>Set User Role:</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" name="adminLevel" value="normal">
+                      <input type="radio" name="adminLevel" value="normal" />
                       <span>Normal User</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" name="adminLevel" value="regular" checked>
+                      <input
+                        type="radio"
+                        name="adminLevel"
+                        value="regular"
+                        checked
+                      />
                       <span>Regular Admin (Basic privileges)</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" name="adminLevel" value="super">
+                      <input type="radio" name="adminLevel" value="super" />
                       <span>Super Admin (Can manage other admins)</span>
                     </label>
                   </div>
                 </div>
               </div>
               <div class="modal-buttons">
-                <button class="modal-cancel-btn" onclick="hideAdminPrivilegeModal()">Cancel</button>
-                <button class="modal-confirm-btn" onclick="confirmAdminPrivilegeAction()">Confirm</button>
+                <button
+                  class="modal-cancel-btn"
+                  onclick="hideAdminPrivilegeModal()"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="modal-confirm-btn"
+                  onclick="confirmAdminPrivilegeAction()"
+                >
+                  Confirm
+                </button>
               </div>
             </div>
           </div>
-            <div class="header">
-              <h2 id="adminPageTitle">User Management</h2>
-            </div>
-            <table class="user-table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>View Reading Records</th>
-                  <th>Ban</th>
-                  <th>Grant Admin Privileges</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Alice</td>
-                  <td><button class="btn" onclick="placeholderFunction('View Records', 'Alice')">View Records</button></td>
-                  <td><button class="btn" onclick="placeholderFunction('Ban', 'Alice')">Ban</button></td>
-                  <td><button class="btn" onclick="placeholderFunction('Grant Admin', 'Alice')">Grant Admin</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>View Reading Records</th>
+                <th>Ban</th>
+                <th>Grant Admin Privileges</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice</td>
+                <td>
+                  <button
+                    class="btn"
+                    onclick="placeholderFunction('View Records', 'Alice')"
+                  >
+                    View Records
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn"
+                    onclick="placeholderFunction('Ban', 'Alice')"
+                  >
+                    Ban
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn"
+                    onclick="placeholderFunction('Grant Admin', 'Alice')"
+                  >
+                    Grant Admin
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- ↑↑↑ 管理员用户管理页面结束 ↑↑↑ -->
         <!-- 阅读历史页面 -->
         <div
           class="reading-history-page"
@@ -520,162 +687,188 @@
             <input type="date" id="end-date" placeholder="End date" />
           </div>
           <div class="history" id="history">
-            <div class="no-history-message" style="display: none;"></div>
+            <div class="no-history-message" style="display: none"></div>
           </div>
         </div>
-
         <!-- 修改用户名页面 -->
-<div class="change-username-page" id="changeUsernamePage" style="display: none">
-  <h3>Change User Name</h3>
-  <div class="change-username-form-group">
-    <label for="newUsername">New User Name</label>
-    <input
-      type="text"
-      id="newUsername"
-      name="newUsername"
-      placeholder="Enter new username"
-    />
-  </div>
-  <div class="change-username-form-buttons">
-    <button type="button" class="cancel-btn" onclick="showProfilePage()">
-      Return
-    </button>
-    <button type="button" class="save-btn" onclick="updateUsername()">
-      Update
-    </button>
-  </div>
-</div>
-
-<!-- 修改密码页面 -->
-<div class="change-password-page" id="changePasswordPage" style="display: none">
-  <h3>Change Password</h3>
-  <div class="change-password-form-group">
-    <button
-      type="button"
-      class="save-btn"
-      onclick="sendVerificationCode()"
-    >
-      Send Verification Code
-    </button>
-  </div>
-  <div class="change-password-form-group">
-    <label for="verificationCode">Verification Code</label>
-    <input
-      type="text"
-      id="verificationCode"
-      name="verificationCode"
-      placeholder="Enter verification code"
-    />
-  </div>
-  <div class="change-password-form-group">
-    <label for="newPassword">New Password</label>
-    <input
-      type="password"
-      id="newPassword"
-      name="newPassword"
-      placeholder="Enter new password"
-    />
-  </div>
-  <div class="change-password-form-group">
-    <label for="confirmPassword">Confirm Password</label>
-    <input
-      type="password"
-      id="confirmPassword"
-      name="confirmPassword"
-      placeholder="Confirm new password"
-    />
-  </div>
-  <div class="change-password-form-buttons">
-    <button type="button" class="cancel-btn" onclick="showProfilePage()">
-      Return
-    </button>
-    <button type="button" class="save-btn" onclick="updatePassword()">
-      Update
-    </button>
-  </div>
-</div>
-
-          <!-- My Book 页面 -->
-          <div class="my-book-page" id="myBookPage" style="display: none">
-            <div class="favourite-section">
-              <h3>My favourite ❤️</h3>
-              <div class="book-grid" id="favouriteBooks">
-                <!-- 书籍卡片将通过JavaScript动态添加 -->
-              </div>
-              <div class="add-book-btn" onclick="showReadingLogForm()">
-                <i class="fas fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- 阅读记录详情页面 -->
-      <div class="reading-details" id="readingDetails" style="display: none">
-        <div class="reading-details-content">
-          <h3 id="detailTitle"></h3>
-          <p id="detailAuthor"></p>
-          <p id="detailDate"></p>
-          <p id="detailReview"></p>
-          <button onclick="closeReadingDetails()">Close</button>
-        </div>
-      </div>
-  
-      <!-- 创建阅读日志表单 -->
-      <div class="reading-log-form" id="readingLogForm" style="display: none">
-        <div class="form-container">
-          <h3>Create a reading log</h3>
-          <div class="book-cover-upload">
-            <img
-              src=""
-              alt="Book Cover"
-              id="bookCoverPreview"
-              style="display: none"
-            />
-            <div class="upload-placeholder" id="uploadPlaceholder">
-              <i class="fas fa-plus"></i>
-            </div>
+        <div
+          class="change-username-page"
+          id="changeUsernamePage"
+          style="display: none"
+        >
+          <h3>Change User Name</h3>
+          <div class="change-username-form-group">
+            <label for="newUsername">New User Name</label>
             <input
-              type="file"
-              id="bookCoverUpload"
-              accept="image/*"
-              style="display: none"
+              type="text"
+              id="newUsername"
+              name="newUsername"
+              placeholder="Enter new username"
             />
           </div>
-          <div class="form-group">
-            <label for="bookTitle">Title:</label>
-            <input type="text" id="bookTitle" placeholder="Enter book title" />
-          </div>
-          <div class="form-group">
-            <label for="bookAuthor">Author:</label>
-            <input type="text" id="bookAuthor" placeholder="Enter author name" />
-          </div>
-          <div class="form-group">
-            <label for="readingDate">Reading Date:</label>
-            <input type="date" id="readingDate" />
-          </div>
-          <div class="form-group">
-            <label for="bookReview">Review:</label>
-            <textarea
-              id="bookReview"
-              rows="5"
-              placeholder="Write your review here..."
-            ></textarea>
-          </div>
-          <div class="form-buttons">
+          <div class="change-username-form-buttons">
             <button
               type="button"
               class="cancel-btn"
-              onclick="hideReadingLogForm()"
+              onclick="showProfilePage()"
             >
-              Cancel
+              Return
             </button>
-            <button type="button" class="save-btn" onclick="createReadingLog()">
-              Create
+            <button type="button" class="save-btn" onclick="updateUsername()">
+              Update
             </button>
           </div>
         </div>
+        <!-- 修改密码页面 -->
+        <div
+          class="change-password-page"
+          id="changePasswordPage"
+          style="display: none"
+        >
+          <h3>Change Password</h3>
+          <div class="change-password-form-group">
+            <button
+              type="button"
+              class="save-btn"
+              onclick="sendVerificationCode()"
+            >
+              Send Verification Code
+            </button>
+          </div>
+          <div class="change-password-form-group">
+            <label for="verificationCode">Verification Code</label>
+            <input
+              type="text"
+              id="verificationCode"
+              name="verificationCode"
+              placeholder="Enter verification code"
+            />
+          </div>
+          <div class="change-password-form-group">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div class="change-password-form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm new password"
+            />
+          </div>
+          <div class="change-password-form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="showProfilePage()"
+            >
+              Return
+            </button>
+            <button type="button" class="save-btn" onclick="updatePassword()">
+              Update
+            </button>
+          </div>
+        </div>
+        <!-- 创建阅读日志表单 -->
+        <div class="reading-log-form" id="readingLogForm" style="display: none">
+          <div class="form-container">
+            <h3>Create a reading log</h3>
+            <div class="book-cover-upload">
+              <img
+                src=""
+                alt="Book Cover"
+                id="bookCoverPreview"
+                style="display: none"
+              />
+              <div class="upload-placeholder" id="uploadPlaceholder">
+                <i class="fas fa-plus"></i>
+              </div>
+              <input
+                type="file"
+                id="bookCoverUpload"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+            <div class="form-group">
+              <label for="bookTitle">Title:</label>
+              <input
+                type="text"
+                id="bookTitle"
+                placeholder="Enter book title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="bookAuthor">Author:</label>
+              <input
+                type="text"
+                id="bookAuthor"
+                placeholder="Enter author name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="readingDate">Reading Date:</label>
+              <input type="date" id="readingDate" />
+            </div>
+            <div class="form-group">
+              <label for="bookReview">Review:</label>
+              <textarea
+                id="bookReview"
+                rows="5"
+                placeholder="Write your review here..."
+              ></textarea>
+            </div>
+            <div class="form-buttons">
+              <button
+                type="button"
+                class="cancel-btn"
+                onclick="hideReadingLogForm()"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                onclick="createReadingLog()"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="reading-details" id="readingDetails" style="display: none">
+      <div class="reading-details-content">
+        <h3 id="detailTitle"></h3>
+        <p id="detailAuthor"></p>
+        <p id="detailDate"></p>
+        <p id="detailReview"></p>
+        <button onclick="closeReadingDetails()">Close</button>
+      </div>
+    </div>
+
+    <div class="progress-modal" id="progressModal" style="display: none">
+      <div class="modal-content">
+        <h4>Update Progress</h4>
+        <input
+          type="number"
+          id="currentProgress"
+          placeholder="Enter current value"
+        />
+        <div class="modal-buttons">
+          <button class="cancel-btn" onclick="closeProgressModal()">
+            Cancel
+          </button>
+          <button class="save-btn" onclick="updateProgress()">Update</button>
+        </div>
       </div>
     </div>
 
