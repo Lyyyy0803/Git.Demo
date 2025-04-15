@@ -124,6 +124,7 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
 
     // 添加当前导航项的激活状态
     this.classList.add("active");
+    
 
     // 获取对应页面的ID
     const pageId = this.getAttribute("data-page");
@@ -139,7 +140,7 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
     document.getElementById("changePasswordPage").style.display = "none";
     document.getElementById("readingHistoryPage").style.display = "none";
     document.getElementById("myBookPage").style.display = "none";
-
+    
     // document.body.classList.remove("dark-theme"); // 关闭深色主题
 
     // 显示对应页面并更新页面标题
@@ -165,7 +166,7 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
         showReadingHistoryPage();
         document.getElementById("pageTitle").textContent = "Reading History";
         break;
-
+    
       case "admin":
         hideAllPages(); // 隐藏所有页面
         document.getElementById("adminUserManagement").style.display = "block";
@@ -174,13 +175,13 @@ document.querySelectorAll(".nav-links li").forEach((item) => {
         break;
 
       case "settings":
-        // hideAllPages();
-        showSettingsPage();
-        document.getElementById("pageTitle").textContent = "Settings";
-        break;
-      default:
-        document.body.classList.remove("dark-theme");
-        break;
+        // hideAllPages(); 
+        showSettingsPage(); 
+        document.getElementById("pageTitle").textContent = "Settings"; 
+        break; 
+        default:
+          document.body.classList.remove("dark-theme");
+          break;
     }
   });
 });
@@ -463,17 +464,16 @@ document
   });
 
 //目标选择更新
+// 在现有JavaScript末尾添加以下代码
 // 目标管理功能
 let currentGoalId = null;
-let goals = JSON.parse(localStorage.getItem("goals")) || [];
+let goals = JSON.parse(localStorage.getItem('goals')) || [];
 
 // 初始化测量单位选择
-document.querySelectorAll(".measurement-btn").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    document
-      .querySelectorAll(".measurement-btn")
-      .forEach((b) => b.classList.remove("active"));
-    this.classList.add("active");
+document.querySelectorAll('.measurement-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.measurement-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
   });
 });
 
@@ -481,32 +481,31 @@ document.querySelectorAll(".measurement-btn").forEach((btn) => {
 function createNewGoal() {
   const goal = {
     id: Date.now(),
-    name: document.getElementById("goalName").value,
-    unit: document.querySelector(".measurement-btn.active").dataset.unit,
-    target: parseInt(document.getElementById("targetValue").value),
-    start: document.getElementById("startDate").value,
-    end: document.getElementById("endDate").value,
-    cover:
-      document.getElementById("goalCoverPreview").style.backgroundImage || "",
+    name: document.getElementById('goalName').value,
+    unit: document.querySelector('.measurement-btn.active').dataset.unit,
+    target: parseInt(document.getElementById('targetValue').value),
+    start: document.getElementById('startDate').value,
+    end: document.getElementById('endDate').value,
+    cover: document.getElementById('goalCoverPreview').style.backgroundImage || '',
     progress: 0,
-    completed: false,
+    completed: false
   };
 
   if (!validateGoal(goal)) return;
 
   goals.push(goal);
-  localStorage.setItem("goals", JSON.stringify(goals));
+  localStorage.setItem('goals', JSON.stringify(goals));
   renderGoals();
   clearGoalForm();
 }
 
 function validateGoal(goal) {
   if (!goal.name || !goal.target || !goal.start || !goal.end) {
-    alert("Please fill all required fields");
+    alert('Please fill all required fields');
     return false;
   }
   if (new Date(goal.start) > new Date(goal.end)) {
-    alert("End date cannot be earlier than start date");
+    alert('End date cannot be earlier than start date');
     return false;
   }
   return true;
@@ -514,23 +513,16 @@ function validateGoal(goal) {
 
 // 渲染目标看板
 function renderGoals() {
-  const grid = document.getElementById("goalGrid");
-  grid.innerHTML = "";
+  const grid = document.getElementById('goalGrid');
+  grid.innerHTML = '';
 
-  goals.forEach((goal) => {
-    const progressPercent = Math.min(
-      Math.round((goal.progress / goal.target) * 100),
-      100
-    );
-    const card = document.createElement("div");
-    card.className = `goal-card ${goal.completed ? "completed" : ""}`;
+  goals.forEach(goal => {
+    const progressPercent = Math.min(Math.round((goal.progress / goal.target) * 100), 100);
+    const card = document.createElement('div');
+    card.className = `goal-card ${goal.completed ? 'completed' : ''}`;
     card.innerHTML = `
-      <button class="delete-goal" onclick="deleteGoal(${
-        goal.id
-      })"><i class="fas fa-times"></i></button>
-      <div class="goal-cover" style="background-image: url(${
-        goal.cover
-      })"></div>
+      <button class="delete-goal" onclick="deleteGoal(${goal.id})"><i class="fas fa-times"></i></button>
+      <div class="goal-cover" style="background-image: url(${goal.cover})"></div>
       <h4>${goal.name}</h4>
       <p>Target: ${goal.target} ${goal.unit}</p>
       <p>Duration: ${formatDate(goal.start)} - ${formatDate(goal.end)}</p>
@@ -538,7 +530,7 @@ function renderGoals() {
            style="background: conic-gradient(#a262ad ${progressPercent}%, #e6d0ef ${progressPercent}% 100%)">
         <div class="progress-percent">${progressPercent}%</div>
       </div>
-      ${goal.completed ? '<i class="fas fa-check-circle checkmark"></i>' : ""}
+      ${goal.completed ? '<i class="fas fa-check-circle checkmark"></i>' : ''}
     `;
     grid.appendChild(card);
   });
@@ -546,24 +538,22 @@ function renderGoals() {
 
 // 删除目标
 function deleteGoal(id) {
-  if (!confirm("Are you sure to delete this goal?")) return;
-  goals = goals.filter((goal) => goal.id !== id);
-  localStorage.setItem("goals", JSON.stringify(goals));
+  if (!confirm('Are you sure to delete this goal?')) return;
+  goals = goals.filter(goal => goal.id !== id);
+  localStorage.setItem('goals', JSON.stringify(goals));
   renderGoals();
 }
 
 // 更新进度
 function showProgressModal(id) {
   currentGoalId = id;
-  document.getElementById("progressModal").style.display = "flex";
+  document.getElementById('progressModal').style.display = 'flex';
 }
 
 function updateProgress() {
-  const goal = goals.find((g) => g.id === currentGoalId);
-  const newProgress = parseInt(
-    document.getElementById("currentProgress").value
-  );
-
+  const goal = goals.find(g => g.id === currentGoalId);
+  const newProgress = parseInt(document.getElementById('currentProgress').value);
+  
   if (newProgress > goal.target || newProgress < 0) {
     alert(`Please enter a value between 0 and ${goal.target}`);
     return;
@@ -571,48 +561,44 @@ function updateProgress() {
 
   goal.progress = newProgress;
   goal.completed = newProgress >= goal.target;
-  localStorage.setItem("goals", JSON.stringify(goals));
+  localStorage.setItem('goals', JSON.stringify(goals));
   closeProgressModal();
   renderGoals();
 }
 
 function closeProgressModal() {
-  document.getElementById("progressModal").style.display = "none";
+  document.getElementById('progressModal').style.display = 'none';
   currentGoalId = null;
-  document.getElementById("currentProgress").value = "";
+  document.getElementById('currentProgress').value = '';
 }
 
 // 封面图片上传
-document
-  .getElementById("goalCoverUpload")
-  .addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        document.getElementById(
-          "goalCoverPreview"
-        ).style.backgroundImage = `url(${event.target.result})`;
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('goalCoverUpload').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      document.getElementById('goalCoverPreview').style.backgroundImage = `url(${event.target.result})`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 // 辅助函数
 function formatDate(dateString) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  return new Date(dateString).toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
   });
 }
 
 function clearGoalForm() {
-  document.getElementById("goalName").value = "";
-  document.getElementById("targetValue").value = "";
-  document.getElementById("startDate").value = "";
-  document.getElementById("endDate").value = "";
-  document.getElementById("goalCoverPreview").style.backgroundImage = "";
+  document.getElementById('goalName').value = '';
+  document.getElementById('targetValue').value = '';
+  document.getElementById('startDate').value = '';
+  document.getElementById('endDate').value = '';
+  document.getElementById('goalCoverPreview').style.backgroundImage = '';
 }
 function hideAllPages() {
   document.getElementById("profilePage").style.display = "none";
@@ -624,43 +610,39 @@ function hideAllPages() {
   document.getElementById("homePage").style.display = "none";
   document.getElementById("settingsPage").style.display = "none";
   document.getElementById("adminUserManagement").style.display = "none";
-  hidePrivacyModal();
-  if (document.getElementById("bookDetailsPage")) {
-    // Check if exists
+  hidePrivacyModal(); 
+  if (document.getElementById("bookDetailsPage")) { // Check if exists
     document.getElementById("bookDetailsPage").style.display = "none";
-  }
-  if (document.getElementById("readingLogForm")) {
-    // Check if exists
-    document.getElementById("readingLogForm").style.display = "none";
-  }
-  if (document.getElementById("progressModal")) {
-    // Check if exists
+}
+if (document.getElementById("readingLogForm")) { // Check if exists
+     document.getElementById("readingLogForm").style.display = "none";
+}
+if (document.getElementById("progressModal")) { // Check if exists
     closeProgressModal(); // Use existing function if available
-  }
-  // Add hide logic for readingDetails if it's a separate overlay
-  if (document.getElementById("readingDetails")) {
-    document.getElementById("readingDetails").style.display = "none";
-  }
-  // If homeContent itself is hidden for book details, ensure it's shown when hiding all
-  if (document.getElementById("homeContent")) {
-    document.getElementById("homeContent").style.display = "block";
-  }
+}
+ // Add hide logic for readingDetails if it's a separate overlay
+if (document.getElementById("readingDetails")) {
+     document.getElementById("readingDetails").style.display = "none";
+}
+// If homeContent itself is hidden for book details, ensure it's shown when hiding all
+ if (document.getElementById("homeContent")) {
+     document.getElementById("homeContent").style.display = 'block';
+ }
+
 }
 
 // 初始化显示首页
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   hideAllPages();
   document.getElementById("homePage").style.display = "block";
-  document
-    .querySelector('.nav-links li[data-page="home"]')
-    .classList.add("active");
+  document.querySelector('.nav-links li[data-page="home"]').classList.add("active");
 });
 
 // 显示书籍详情页（作为主页的一部分）
 function showBookDetails() {
   // 隐藏主页内容
   document.getElementById("homeContent").style.display = "none";
-
+  
   // 显示书籍详情页
   document.getElementById("bookDetailsPage").style.display = "block";
   document.getElementById("pageTitle").textContent = "Book Details";
@@ -670,14 +652,15 @@ function showBookDetails() {
 function hideBookDetails() {
   // 隐藏书籍详情页
   document.getElementById("bookDetailsPage").style.display = "none";
-
+  
   // 显示主页内容
   document.getElementById("homeContent").style.display = "block";
   document.getElementById("pageTitle").textContent = "Home";
 }
 
 // 初始化时渲染目标
-document.addEventListener("DOMContentLoaded", renderGoals);
+document.addEventListener('DOMContentLoaded', renderGoals);
+
 
 function showSettingsPage() {
   // hideAllPages(); // Called by the navigation handler already
@@ -697,12 +680,11 @@ function handleLanguageSetting() {
 function showPrivacyModal() {
   const modalOverlay = document.getElementById("privacyModalOverlay");
   if (modalOverlay) {
-    modalOverlay.style.display = "flex"; // Use flex to enable centering
-    // Trigger fade-in animation using a class
-    setTimeout(() => {
-      // Timeout ensures display:flex is applied before class change
-      modalOverlay.classList.add("visible");
-    }, 10); // Small delay
+      modalOverlay.style.display = "flex"; // Use flex to enable centering
+      // Trigger fade-in animation using a class
+       setTimeout(() => { // Timeout ensures display:flex is applied before class change
+           modalOverlay.classList.add('visible');
+       }, 10); // Small delay
   }
 }
 
@@ -710,33 +692,34 @@ function showPrivacyModal() {
 function hidePrivacyModal() {
   const modalOverlay = document.getElementById("privacyModalOverlay");
   if (modalOverlay) {
-    // Trigger fade-out animation
-    modalOverlay.classList.remove("visible");
-    // Wait for transition to finish before setting display to none
-    setTimeout(() => {
-      modalOverlay.style.display = "none";
-    }, 300); // Match CSS transition duration (0.3s)
+      // Trigger fade-out animation
+      modalOverlay.classList.remove('visible');
+      // Wait for transition to finish before setting display to none
+       setTimeout(() => {
+           modalOverlay.style.display = "none";
+       }, 300); // Match CSS transition duration (0.3s)
   }
 }
+
 
 /* Admin User Management */
 // 显示管理员弹窗
 function showAdminModal(username) {
-  document.getElementById("modalUsername").textContent = username;
-
+  document.getElementById('modalUsername').textContent = username;
+  
   // 模拟获取用户阅读记录数据
   const records = [
-    { date: "2025-04-10", book: "The Great Gatsby", pages: 45 },
-    { date: "2025-04-08", book: "To Kill a Mockingbird", pages: 32 },
-    { date: "2025-04-05", book: "1984", pages: 28 },
+    { date: '2025-04-10', book: 'The Great Gatsby', pages: 45 },
+    { date: '2025-04-08', book: 'To Kill a Mockingbird', pages: 32 },
+    { date: '2025-04-05', book: '1984', pages: 28 }
   ];
 
-  const recordsList = document.getElementById("recordsList");
-  recordsList.innerHTML = "";
-
-  records.forEach((record) => {
-    const recordItem = document.createElement("div");
-    recordItem.className = "record-item";
+  const recordsList = document.getElementById('recordsList');
+  recordsList.innerHTML = '';
+  
+  records.forEach(record => {
+    const recordItem = document.createElement('div');
+    recordItem.className = 'record-item';
     recordItem.innerHTML = `
       <p><strong>Date:</strong> ${record.date}</p>
       <p><strong>Book:</strong> ${record.book}</p>
@@ -746,163 +729,138 @@ function showAdminModal(username) {
   });
 
   // 显示弹窗
-  document.getElementById("adminModalOverlay").style.display = "flex";
+  document.getElementById('adminModalOverlay').style.display = 'flex';
   setTimeout(() => {
-    document.getElementById("adminModalOverlay").classList.add("visible");
+    document.getElementById('adminModalOverlay').classList.add('visible');
   }, 10);
 }
 
 // 隐藏管理员弹窗
 function hideAdminModal() {
-  document.getElementById("adminModalOverlay").classList.remove("visible");
+  document.getElementById('adminModalOverlay').classList.remove('visible');
   setTimeout(() => {
-    document.getElementById("adminModalOverlay").style.display = "none";
+    document.getElementById('adminModalOverlay').style.display = 'none';
   }, 300);
 }
 
 // 显示Ban弹窗
 function showBanModal(username) {
-  document.getElementById("banModalUsername").textContent = username;
-
+  document.getElementById('banModalUsername').textContent = username;
+  
   // 重置表单状态
-  document.querySelector(
-    'input[name="userStatus"][value="active"]'
-  ).checked = true;
-  document.getElementById("banReason").value = "";
-  document.getElementById("customReason").value = "";
-  document.getElementById("customReasonGroup").style.display = "none";
-
+  document.querySelector('input[name="userStatus"][value="active"]').checked = true;
+  document.getElementById('banReason').value = '';
+  document.getElementById('customReason').value = '';
+  document.getElementById('customReasonGroup').style.display = 'none';
+  
   // 监听封禁原因选择变化
-  document.getElementById("banReason").addEventListener("change", function () {
-    if (this.value === "other") {
-      document.getElementById("customReasonGroup").style.display = "block";
+  document.getElementById('banReason').addEventListener('change', function() {
+    if (this.value === 'other') {
+      document.getElementById('customReasonGroup').style.display = 'block';
     } else {
-      document.getElementById("customReasonGroup").style.display = "none";
+      document.getElementById('customReasonGroup').style.display = 'none';
     }
   });
 
   // 显示弹窗
-  document.getElementById("banModalOverlay").style.display = "flex";
+  document.getElementById('banModalOverlay').style.display = 'flex';
   setTimeout(() => {
-    document.getElementById("banModalOverlay").classList.add("visible");
+    document.getElementById('banModalOverlay').classList.add('visible');
   }, 10);
 }
 
 // 隐藏Ban弹窗
 function hideBanModal() {
-  document.getElementById("banModalOverlay").classList.remove("visible");
+  document.getElementById('banModalOverlay').classList.remove('visible');
   setTimeout(() => {
-    document.getElementById("banModalOverlay").style.display = "none";
+    document.getElementById('banModalOverlay').style.display = 'none';
   }, 300);
 }
 
 // 确认封禁操作
 function confirmBanAction() {
-  const username = document.getElementById("banModalUsername").textContent;
-  const status = document.querySelector(
-    'input[name="userStatus"]:checked'
-  ).value;
-  const reason = document.getElementById("banReason").value;
-  const customReason = document.getElementById("customReason").value;
-
+  const username = document.getElementById('banModalUsername').textContent;
+  const status = document.querySelector('input[name="userStatus"]:checked').value;
+  const reason = document.getElementById('banReason').value;
+  const customReason = document.getElementById('customReason').value;
+  
   // 验证必填字段
-  if (status === "banned" && !reason) {
-    alert("Please select a ban reason");
+  if (status === 'banned' && !reason) {
+    alert('Please select a ban reason');
     return;
   }
-
-  if (reason === "other" && !customReason.trim()) {
-    alert("Please specify the ban reason");
+  
+  if (reason === 'other' && !customReason.trim()) {
+    alert('Please specify the ban reason');
     return;
   }
-
+  
   // 构建完整原因
-  const fullReason = reason === "other" ? customReason : reason;
-
+  const fullReason = reason === 'other' ? customReason : reason;
+  
   // 执行封禁/解封操作
-  console.log(
-    `User ${username} status changed to ${status}. Reason: ${fullReason}`
-  );
-
+  console.log(`User ${username} status changed to ${status}. Reason: ${fullReason}`);
+  
   // 这里可以添加实际的API调用
   alert(`User ${username} has been ${status}. Reason: ${fullReason}`);
-
+  
   hideBanModal();
 }
 
 // 当前管理员状态
-let currentAdminLevel = "super"; // 默认设置为超级管理员
+let currentAdminLevel = 'super'; // 默认设置为超级管理员
 
 // 显示管理员权限弹窗
 function showAdminPrivilegeModal(username) {
-  document.getElementById("adminPrivilegeUsername").textContent = username;
-  document.getElementById("currentAdminLevel").textContent =
-    currentAdminLevel === "super" ? "Super Admin" : "Regular Admin";
-
+  document.getElementById('adminPrivilegeUsername').textContent = username;
+  document.getElementById('currentAdminLevel').textContent = 
+    currentAdminLevel === 'super' ? 'Super Admin' : 'Regular Admin';
+  
   // 如果是普通管理员，隐藏权限选项
-  if (currentAdminLevel !== "super") {
-    document.getElementById("privilegeOptions").style.display = "none";
+  if (currentAdminLevel !== 'super') {
+    document.getElementById('privilegeOptions').style.display = 'none';
   } else {
-    document.getElementById("privilegeOptions").style.display = "block";
+    document.getElementById('privilegeOptions').style.display = 'block';
     // 重置选项，默认选中Regular Admin
-    document.querySelector(
-      'input[name="adminLevel"][value="regular"]'
-    ).checked = true;
-    document.querySelector(
-      'input[name="adminLevel"][value="normal"]'
-    ).checked = false;
-    document.querySelector(
-      'input[name="adminLevel"][value="super"]'
-    ).checked = false;
+    document.querySelector('input[name="adminLevel"][value="regular"]').checked = true;
+    document.querySelector('input[name="adminLevel"][value="normal"]').checked = false;
+    document.querySelector('input[name="adminLevel"][value="super"]').checked = false;
   }
 
   // 显示弹窗
-  document.getElementById("adminPrivilegeModalOverlay").style.display = "flex";
+  document.getElementById('adminPrivilegeModalOverlay').style.display = 'flex';
   setTimeout(() => {
-    document
-      .getElementById("adminPrivilegeModalOverlay")
-      .classList.add("visible");
+    document.getElementById('adminPrivilegeModalOverlay').classList.add('visible');
   }, 10);
 }
 
 // 隐藏管理员权限弹窗
 function hideAdminPrivilegeModal() {
-  document
-    .getElementById("adminPrivilegeModalOverlay")
-    .classList.remove("visible");
+  document.getElementById('adminPrivilegeModalOverlay').classList.remove('visible');
   setTimeout(() => {
-    document.getElementById("adminPrivilegeModalOverlay").style.display =
-      "none";
+    document.getElementById('adminPrivilegeModalOverlay').style.display = 'none';
   }, 300);
 }
 
 // 确认管理员权限操作
 function confirmAdminPrivilegeAction() {
-  const username = document.getElementById(
-    "adminPrivilegeUsername"
-  ).textContent;
-  const adminLevel = document.querySelector(
-    'input[name="adminLevel"]:checked'
-  ).value;
-
+  const username = document.getElementById('adminPrivilegeUsername').textContent;
+  const adminLevel = document.querySelector('input[name="adminLevel"]:checked').value;
+  
   // 执行权限分配操作
   console.log(`Granting ${adminLevel} admin privileges to ${username}`);
-  alert(
-    `Successfully granted ${
-      adminLevel === "super" ? "Super Admin" : "Regular Admin"
-    } privileges to ${username}`
-  );
-
+  alert(`Successfully granted ${adminLevel === 'super' ? 'Super Admin' : 'Regular Admin'} privileges to ${username}`);
+  
   hideAdminPrivilegeModal();
 }
 
 // 修改按钮点击事件处理
 function placeholderFunction(action, username) {
-  if (action === "View Records") {
+  if (action === 'View Records') {
     showAdminModal(username);
-  } else if (action === "Ban") {
+  } else if (action === 'Ban') {
     showBanModal(username);
-  } else if (action === "Grant Admin") {
+  } else if (action === 'Grant Admin') {
     showAdminPrivilegeModal(username);
   } else {
     console.log("Button clicked: " + action + " for " + username);
@@ -915,4 +873,5 @@ function showAdminPage() {
   hideAllPages(); // 隐藏其它页面
   document.getElementById("adminUserManagement").style.display = "block";
   document.getElementById("pageTitle").textContent = "User Management";
+  document.body.classList.add("dark-theme"); // 开启深色主题
 }
