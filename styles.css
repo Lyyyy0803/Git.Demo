@@ -29,7 +29,7 @@ body {
   border-bottom: 1px solid #c9b5d9;
   font-size: 26px;
   font-weight: 700;
-  color: #7e3b8d;
+  color: #fff;
 }
 
 .logo-image {
@@ -154,8 +154,8 @@ body {
 }
 
 .user-avatar img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-left: 15px;
   margin-right: 15px;
@@ -366,62 +366,66 @@ body {
 
 /* 首页样式 */
 .home-page {
-  padding: 20px;
+  padding: 5px;
+  margin-top: -10px;
 }
 
 .welcome-title {
-  color: #9050bb;
-  font-size: 48px;
+  color: #a262ad;
+  font-size: 50px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  margin-top: -10px;
   text-align: center;
 }
 
-.search-container {
+.search-container1 {
   display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.search-box {
-  display: flex;
-  width: 80%;
-  max-width: 800px;
-  background: transparent;
+  align-items: center;
+  border: 1px solid #a262ad; /* 紫色 */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px;
+  width: 545px;
+  height: 39px;
+  background-color: #a262ad;
+  margin-bottom: 25px;
+  margin-top: -15px;
 }
 
 .search-box input {
-  flex: 1;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 25px 0 0 25px;
-  font-size: 18px;
-  color: #9050bb;
+  width: 500px; /* 宽度 */
+  height: 40px; /* 高度 */
+  padding: 0 10px; /* 内边距 */
+  font-size: 16px; /* 字体大小 */
+  border: 1px solid #a262ad; /* 边框样式 */
+  color: #a262ad;
+  border-radius: 0px;
 }
 
-.search-box input::placeholder {
-  color: rgba(144, 80, 187, 0.5);
+.search-box input[type="text"] {
+  border-color: #a262ad; /* 聚焦时的边框颜色 */
+  background-color: #fff; /* 聚焦时的背景颜色 */
+  outline: none; /* 移除聚焦时的默认外边框 */
 }
 
 .search-icon {
-  background: transparent;
-  color: #9050bb;
+  padding: 12px 12px;
+  background-color: #a262ad; /* 紫色 */
+  color: white;
   border: none;
-  padding: 0 20px;
   cursor: pointer;
-  outline: none;
-  transition: color 0.3s;
-}
-
-.search-icon:hover {
-  color: #7e3b8d;
 }
 
 .section-title {
-  color: #9050bb;
-  font-size: 36px;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 .divider {
@@ -435,6 +439,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
   padding: 0 20px;
+  color: #f3e5f5;
 }
 
 .book-card {
@@ -471,10 +476,11 @@ body {
 .book-details-content {
   max-width: 1200px;
   margin: 0 auto;
-  background: white;
+  background: #d8c4e3;
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 60px;
 }
 
 .book-details-header {
@@ -487,12 +493,12 @@ body {
 }
 
 .book-details-header h2 {
-  color: #9050bb;
+  color: #a262ad;
   font-size: 36px;
 }
 
 .back-btn {
-  background: #9050bb;
+  background: #a262ad;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -530,7 +536,7 @@ body {
 }
 
 .book-info-item h3 {
-  color: #9050bb;
+  color: #a262ad;
   font-size: 24px;
   margin-bottom: 8px;
 }
@@ -599,7 +605,7 @@ body {
 }
 
 .download-btn {
-  background: #9050bb;
+  background: #a262ad;
   color: white;
 }
 
@@ -609,7 +615,7 @@ body {
 
 .read-btn {
   background: #d3b7d8;
-  color: #333;
+  color: #fff;
 }
 
 .read-btn:hover {
@@ -618,7 +624,7 @@ body {
 
 .favorite-btn {
   background: #f3e5f5;
-  color: #333;
+  color: #a262ad;
 }
 
 .favorite-btn:hover {
@@ -629,10 +635,11 @@ body {
   padding: 20px;
   background: #f9f9f9;
   border-radius: 8px;
+  opacity: 80%;
 }
 
 .book-description h3 {
-  color: #9050bb;
+  color: #a262ad;
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -672,7 +679,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: -5px;
+  margin-top: -15px;
 }
 
 .search-bar input[type="text"],
@@ -692,6 +699,7 @@ body {
   border-radius: 5px;
   overflow: hidden;
   margin-right: 10px;
+  background-color: #a262ad;
 }
 
 .search-container input {
@@ -814,7 +822,7 @@ body {
 }
 
 .book-card {
-  background-color: #e4d0f5;
+  background-color: #f3e5f5;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -850,7 +858,7 @@ body {
 .add-book-btn {
   width: 150px;
   height: 200px;
-  background-color: #d8c4e3;
+  background-color: #f3e5f5;
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -1010,42 +1018,75 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease;
 }
 
 .reading-details-content {
   background-color: white;
-  border-radius: 8px;
-  padding: 30px;
-  width: 80%;
-  max-width: 600px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 40px;
+  width: 85%;
+  max-width: 650px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  animation: fadeInUp 0.4s ease-out forwards;
 }
 
 .reading-details-content h3 {
-  margin-bottom: 15px;
-  color: #a262ad;
+  margin-bottom: 20px;
+  color: #7e3b8d;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .reading-details-content p {
-  margin-bottom: 10px;
-  font-size: 16px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
 }
 
 .reading-details-content button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #a262ad;
+  margin-top: 30px;
+  padding: 12px 30px;
+  background-color: #7e3b8d;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+.reading-details-content button:hover {
+  background-color: #6a2d7a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(126, 59, 141, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* 目标更新 */
 /* Goal Setting page styles */
 /* 在现有CSS末尾添加以下样式 */
@@ -1057,15 +1098,16 @@ body {
 .goal-management h3 {
   color: #a262ad;
   font-size: 28px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  margin-top: -55px;
 }
 
 .goal-form {
-  background: #fff;
+  background: #fbf5ff;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(162, 98, 173, 0.1);
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 .date-group {
@@ -1116,7 +1158,7 @@ body {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .upload-btn:hover {
@@ -1359,7 +1401,7 @@ body {
   color: #555; /* Dark grey for readability */
 }
 
-.modal-close-btn {
+.privacy-modal-content .modal-close-btn {
   display: block; /* Make it a block element */
   margin: 20px auto 0; /* Center button */
   padding: 12px 25px;
@@ -1372,24 +1414,18 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.modal-close-btn:hover {
+.privacy-modal-content .modal-close-btn:hover {
   background-color: #8e4d9b; /* Darker shade on hover */
 }
 
 /* 管理员 */
 /* ↓↓↓ Admin User Management Page - Gray/Black Theme ↓↓↓ */
 .admin-user-management {
-  background-color: #2c2c2c; /* 深灰背景 */
-  color: #ddd; /* 浅灰文字 */
+  background-color: #f5ddc0;
+  color: #f7aa35;
+  font-size: 20px;
+  font-weight: 500;
   padding: 20px;
-}
-
-.admin-user-management .header h2 {
-  color: #fff; /* 标题白色 */
-  font-size: 36px;
-  padding: 15px;
-  text-align: left;
-  margin-bottom: 0;
 }
 
 .admin-user-management .user-table {
@@ -1401,34 +1437,35 @@ body {
 
 .admin-user-management .user-table th,
 .admin-user-management .user-table td {
-  border: 1px solid #444; /* 边框颜色深一些 */
+  border: 1px solid #f7c57b; /* 边框颜色深一些 */
   padding: 10px;
-  font-size: 16px;
+  font-size: 24px;
 }
 
 .admin-user-management .user-table th {
-  background-color: #3c3c3c; /* 表头深灰 */
+  background-color: #f7c57b; /* 表头深灰 */
   color: #fff;
   font-weight: 700;
 }
 
 .admin-user-management .user-table tr:nth-child(even) {
-  background-color: #3a3a3a;
+  background-color: #f7c57b;
 }
 
 .admin-user-management .btn {
   padding: 6px 12px;
-  background-color: #555; /* 按钮背景较暗 */
+  background-color: #f7c57b; /* 按钮背景较暗 */
   color: #fff; /* 按钮文字白色 */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: 500;
   transition: background-color 0.3s ease;
 }
 
 .admin-user-management .btn:hover {
-  background-color: #777;
+  background-color: #f8a931;
 }
 /* ↑↑↑ Admin User Management Page - Gray/Black Theme ↑↑↑ */
 
@@ -1456,7 +1493,7 @@ body {
 }
 
 .admin-modal-content {
-  background-color: #3c3c3c;
+  background-color: #f5ddc0;
   padding: 30px;
   border-radius: 10px;
   width: 80%;
@@ -1473,8 +1510,8 @@ body {
 }
 
 .admin-modal-content h4 {
-  color: #fff;
-  font-size: 24px;
+  color: #f8a931;
+  font-size: 28px;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -1484,16 +1521,16 @@ body {
   overflow-y: auto;
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #2c2c2c;
+  background-color: #f5ddc0;
   border-radius: 5px;
 }
 
 .record-item {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #444;
+  background-color: #f9d8a7;
   border-radius: 5px;
-  color: #ddd;
+  color: #f8a931;
 }
 
 .record-item:last-child {
@@ -1504,22 +1541,28 @@ body {
   display: block;
   margin: 0 auto;
   padding: 10px 25px;
-  background-color: #a262ad;
+  background-color: #f7c57b;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   transition: background-color 0.2s;
 }
 
 .modal-close-btn:hover {
-  background-color: #8e4d9b;
+  background-color: #f8a931;
 }
 
 /* Ban弹窗特定样式 */
 .ban-form {
   margin: 20px 0;
+}
+
+.admin-modal-content label {
+  color: #f7aa35;
+  font-size: 20px;
 }
 
 .radio-group {
@@ -1538,7 +1581,7 @@ body {
 .ban-reason-select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #d8c4e3;
+  border: 1px solid #f5ddc0;
   border-radius: 5px;
   margin-top: 5px;
 }
@@ -1550,7 +1593,7 @@ body {
 #customReason {
   width: 100%;
   padding: 10px;
-  border: 1px solid #d8c4e3;
+  border: 1px solid #f5ddc0;
   border-radius: 5px;
   resize: vertical;
 }
@@ -1565,27 +1608,32 @@ body {
 .modal-cancel-btn {
   padding: 10px 20px;
   background: none;
-  border: 1px solid #a262ad;
-  color: #a262ad;
+  border: 1px solid #f8a931;
+  color: #f8a931;
+  font-size: 16px;
+  font-weight: 500;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .modal-confirm-btn {
   padding: 10px 20px;
-  background: #a262ad;
+  background: #f7c57b;
   border: none;
   color: white;
+  font-size: 16px;
+  font-weight: 500;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .modal-cancel-btn:hover {
-  background: #f0e6f8;
+  background: #f8a931;
+  color: #fff;
 }
 
 .modal-confirm-btn:hover {
-  background: #8e4d9b;
+  background: #f8a931;
 }
 
 /* 管理员权限弹窗特定样式 */
@@ -1598,86 +1646,86 @@ body {
 }
 
 .admin-privilege-form .form-group p {
-  color: #ddd;
-  font-size: 16px;
+  color: #f7aa35;
+  font-size: 20px;
   margin: 10px 0;
 }
 
 .admin-privilege-form .form-group p strong {
-  color: #a262ad;
+  color: #f8a931;
 }
 
 .admin-privilege-form label {
   display: block;
   margin-bottom: 10px;
-  color: #ddd;
+  color: #f7aa35;
 }
 
 .admin-privilege-form .radio-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;
+  width: 600px;
 }
 
 .admin-privilege-form .radio-group label {
   display: flex;
-  align-items: center;
   gap: 8px;
   cursor: pointer;
-  color: #ddd;
-  width: 100%;
-  justify-content: flex-start;
-  max-width: 300px;
-  margin: 0 auto;
+  color: #f7aa35;
+  width: 600px;
+  text-align: left;
 }
 
 .admin-privilege-form .radio-group label span {
-  display: inline-block;
-  width: 200px;
+  display: flex;
+  width: 600px;
   text-align: left;
 }
 
 .admin-privilege-form .radio-group input[type="radio"] {
-  accent-color: #a262ad;
+  accent-color: #f8a931;
 }
 
 #currentAdminLevel {
-  color: #a262ad;
+  color: #f8a931;
   font-weight: bold;
 }
 
 .dark-theme body {
-  background-color: #1a1a1a; /* 设置深色背景 */
-  color: #ddd; /* 全局浅灰文字 */
+  background-color: #f5ddf5; /* 设置深色背景 */
+  color: #ffffff;
 }
 
 .dark-theme .sidebar {
-  background-color: #333;
-  border-right: 1px solid #444;
+  background-color: #f7cf94;
+  border-right: 1px solid #f5e6d0;
+}
+
+.dark-theme .logo {
+  border-bottom: 1px solid#f8b24a;
 }
 
 .dark-theme .sidebar .logo span {
-  color: #ddd;
+  color: #fff;
 }
 
 .dark-theme .content {
-  background-color: #2c2c2c; /* 内容区也变深色 */
+  background-color: #f5ddc0; /* 内容区也变深色 */
+}
+/* 管理员页面标题下的横线颜色 */
+.dark-theme .header::after {
+  background-color: #f8a931; /* 修改为橙色 */
 }
 
-.dark-theme .header h2 {
-  color: #ddd;
-}
-
-/* 如果原本有其他元素需要调整颜色，请在这里添加 */
-.dark-theme .nav-links li,
-.dark-theme .nav-links li i,
-.dark-theme .nav-links li span {
-  color: #ccc;
+.dark-theme .header h2,
+.dark-theme .header span,
+.dark-theme .header i {
+  color: #f7aa35;
 }
 
 .dark-theme .nav-links li.active,
 .dark-theme .nav-links li:hover {
-  background-color: #444;
-  color: #fff;
+  background-color: #f7c57b;
+  color: #f3a228;
 }
